@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZenderBox Brand Bible</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cyan:     #029ECB;
+  --lime:     #CCD32A;
+  --navy:     #004B72;
+  --dk-cyan:  #007B9F;
+  --grad:     linear-gradient(45deg, #029ECB 0%, #CCD32A 85%);
+  --grad-web: linear-gradient(90deg, #CCD32A 0%, #029ECB 85%);
+  --ink:      #1F1F1F;
+  --body:     #333333;
+  --soft:     #666666;
+  --mid:      #8A8A8A;
+  --ph:       #B8B8B8;
+  --divider:  #E5E7EB;
+  --surface:  #F6F6F6;
+  --white:    #FFFFFF;
+  --sidebar-w: 260px;
+}
+
+html, body { height: 100%; }
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: #F4F5F7;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: var(--sidebar-w);
+  min-height: 100vh;
+  background: var(--navy);
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  z-index: 100;
+}
+.sidebar-logo {
+  padding: 28px 24px 24px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  display: flex; align-items: center; gap: 12px;
+}
+.sidebar-logo-badge {
+  font-family: 'Exo', sans-serif;
+  font-size: 9px; font-weight: 800; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--navy);
+  background: var(--lime);
+  padding: 3px 8px; border-radius: 99px;
+  margin-top: 2px; white-space: nowrap;
+}
+.sidebar-nav { padding: 16px 0; flex: 1; }
+.nav-section-title {
+  font-size: 9px; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: rgba(255,255,255,.3);
+  padding: 16px 24px 8px;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 24px; cursor: pointer;
+  font-size: 13px; font-weight: 500;
+  color: rgba(255,255,255,.6);
+  transition: color .15s, background .15s;
+  border-left: 2px solid transparent;
+  text-decoration: none;
+}
+.nav-item:hover { color: rgba(255,255,255,.9); background: rgba(255,255,255,.05); }
+.nav-item.active {
+  color: white; font-weight: 700;
+  background: rgba(255,255,255,.08);
+  border-left-color: var(--lime);
+}
+.nav-item svg { width: 15px; height: 15px; opacity: .7; flex-shrink: 0; }
+.nav-item.active svg { opacity: 1; }
+.sidebar-footer {
+  padding: 20px 24px;
+  border-top: 1px solid rgba(255,255,255,.1);
+  font-size: 11px; color: rgba(255,255,255,.3);
+  line-height: 1.5;
+}
+
+/* ── MAIN ── */
+.main {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  min-height: 100vh;
+}
+.topbar {
+  background: white;
+  border-bottom: 1px solid var(--divider);
+  padding: 0 40px;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 50;
+}
+.topbar-title {
+  font-family: 'Exo', sans-serif;
+  font-size: 16px; font-weight: 700; color: var(--navy);
+}
+.topbar-badge {
+  font-size: 11px; font-weight: 600; color: var(--mid);
+  background: var(--surface); border: 1px solid var(--divider);
+  padding: 4px 12px; border-radius: 99px;
+}
+.content { padding: 40px; }
+
+/* ── SECTIONS ── */
+.section { display: none; }
+.section.active { display: block; }
+
+/* ── PAGE HEADER ── */
+.page-header { margin-bottom: 40px; }
+.page-eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--cyan); margin-bottom: 10px;
+}
+.page-title {
+  font-family: 'Exo', sans-serif;
+  font-size: 36px; font-weight: 800; color: var(--navy);
+  line-height: 1.1; margin-bottom: 12px;
+}
+.page-desc { font-size: 15px; line-height: 1.65; color: var(--soft); max-width: 600px; }
+
+/* ── CARDS / CONTAINERS ── */
+.card {
+  background: white; border-radius: 16px;
+  border: 1px solid var(--divider);
+  padding: 28px;
+  margin-bottom: 24px;
+}
+.card-title {
+  font-family: 'Exo', sans-serif;
+  font-size: 14px; font-weight: 700; color: var(--navy);
+  text-transform: uppercase; letter-spacing: .06em;
+  margin-bottom: 20px; padding-bottom: 12px;
+  border-bottom: 1px solid var(--divider);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+
+/* ── SWATCH ── */
+.color-swatch {
+  border-radius: 12px; overflow: hidden;
+  border: 1px solid var(--divider);
+}
+.swatch-preview {
+  height: 80px;
+  display: flex; align-items: flex-end;
+  padding: 10px;
+}
+.swatch-body { padding: 12px 14px; background: white; }
+.swatch-name { font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+.swatch-hex  { font-size: 11px; font-family: monospace; color: var(--mid); margin-bottom: 4px; }
+.swatch-use  { font-size: 10px; color: var(--soft); line-height: 1.4; }
+.swatch-chip {
+  font-size: 9px; font-weight: 700; letter-spacing: .06em;
+  background: rgba(0,0,0,.12); color: white;
+  padding: 2px 8px; border-radius: 99px;
+}
+
+/* ── TYPE SCALE ── */
+.type-row {
+  display: flex; align-items: baseline; gap: 24px;
+  padding: 14px 0; border-bottom: 1px solid #F0F0F0;
+}
+.type-row:last-child { border-bottom: none; }
+.type-meta { width: 200px; flex-shrink: 0; }
+.type-label { font-size: 11px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+.type-spec  { font-size: 10px; color: var(--mid); font-family: monospace; }
+.type-preview { color: var(--ink); }
+
+/* ── CODE BLOCK ── */
+.code-block {
+  background: #1E2432; border-radius: 10px;
+  padding: 16px 20px; font-family: monospace;
+  font-size: 12px; line-height: 1.7;
+  color: #E2E8F0; overflow-x: auto;
+  margin-top: 12px;
+}
+.code-block .k { color: #93C5FD; }  /* keyword */
+.code-block .s { color: #86EFAC; }  /* string/value */
+.code-block .c { color: #6B7280; }  /* comment */
+.code-block .p { color: #FCA5A5; }  /* property */
+
+/* ── BUTTONS PREVIEW ── */
+.btn-preview {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 8px; cursor: default; border: none;
+  transition: filter .15s, transform .1s;
+  white-space: nowrap;
+}
+.btn-preview:hover { filter: brightness(1.06); }
+.btn-preview:active { transform: scale(.98); }
+
+.bp-primary {
+  background: var(--grad); color: white;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px; font-weight: 800;
+  height: 52px; padding: 0 28px; border-radius: 8px;
+}
+.bp-secondary {
+  background: var(--cyan); color: white;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px; font-weight: 700;
+  height: 52px; padding: 0 28px; border-radius: 8px;
+}
+.bp-stroke {
+  background: var(--surface); color: var(--dk-cyan);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px; font-weight: 700;
+  height: 52px; padding: 0 28px; border-radius: 8px;
+  border: 1px solid var(--dk-cyan);
+}
+.bp-sm {
+  background: var(--grad); color: white;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px; font-weight: 700;
+  height: 34px; padding: 0 18px; border-radius: 8px;
+}
+.bp-web-primary {
+  background: var(--grad-web); color: white;
+  font-family: 'Exo', sans-serif;
+  font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
+  height: 54px; padding: 0 36px; border-radius: 900px;
+}
+.bp-web-secondary {
+  background: var(--cyan); color: white;
+  font-family: 'Exo', sans-serif;
+  font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
+  height: 54px; padding: 0 36px; border-radius: 900px;
+}
+.bp-web-tertiary {
+  background: transparent; color: var(--navy);
+  font-family: 'Exo', sans-serif;
+  font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
+  height: 54px; padding: 0 34px; border-radius: 900px;
+  border: 2px solid var(--navy);
+}
+.btn-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin: 16px 0; }
+.btn-annotation {
+  font-size: 10px; color: var(--mid); margin-top: 6px;
+  display: flex; align-items: center; gap: 6px;
+}
+
+/* ── STATE BADGES ── */
+.state-badge {
+  display: inline-flex; align-items: center;
+  border-radius: 99px; border: 1px solid;
+  font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  padding: 4px 12px; white-space: nowrap;
+}
+.sb-tienda    { color: #0260CB; background: #E8F0FB; border-color: rgba(2,96,203,.2); }
+.sb-bodega    { color: #008C31; background: #F1F6F5; border-color: rgba(0,140,49,.2); }
+.sb-despachado{ color: #E66B00; background: #FDF3EA; border-color: rgba(230,107,0,.2); }
+.sb-camino    { color: #F32735; background: #F4E8E9; border-color: rgba(243,39,53,.2); }
+.sb-entregado { color: #FF28E2; background: #FDE8FB; border-color: rgba(255,40,226,.2); }
+
+/* ── ICON GRID ── */
+.icon-grid { display: grid; grid-template-columns: repeat(6,1fr); gap: 12px; }
+.icon-item {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 16px 8px; border: 1px solid var(--divider);
+  border-radius: 10px; cursor: default;
+  transition: border-color .15s, background .15s;
+}
+.icon-item:hover { border-color: var(--cyan); background: #F0FAFB; }
+.icon-item svg { width: 18px; height: 18px; stroke: var(--ink); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.icon-item span { font-size: 9px; color: var(--mid); text-align: center; }
+
+/* ── PHOTO EXAMPLE ── */
+.photo-example {
+  border-radius: 16px; overflow: hidden; position: relative;
+  height: 280px;
+}
+.photo-example img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo-overlay-ex {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.75) 0%, transparent 55%);
+}
+.photo-caption-ex {
+  position: absolute; bottom: 20px; left: 20px; right: 20px;
+}
+.photo-tag-ex { font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 4px; }
+.photo-title-ex { font-family: 'Exo', sans-serif; font-size: 18px; font-weight: 700; color: white; }
+
+/* ── ISO ILLO ── */
+.iso-wrap { display: flex; justify-content: center; align-items: center; height: 160px; background: #EFF9FC; border-radius: 12px; overflow: hidden; }
+.iso-wrap svg { display: block; }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+.iso-anim { animation: float 4s ease-in-out infinite; }
+
+/* ── SPACING VISUAL ── */
+.spacing-row { display: flex; align-items: center; gap: 16px; margin-bottom: 10px; }
+.spacing-block { background: var(--cyan); border-radius: 3px; height: 24px; opacity: .7; }
+.spacing-label { font-size: 11px; color: var(--body); font-family: monospace; min-width: 80px; }
+.spacing-desc  { font-size: 12px; color: var(--soft); }
+
+/* ── DO/DONT ── */
+.do-dont-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.do-card, .dont-card {
+  padding: 20px; border-radius: 12px;
+}
+.do-card   { background: #F0FDF4; border: 1px solid rgba(0,140,49,.2); }
+.dont-card { background: #FFF5F5; border: 1px solid rgba(243,39,53,.2); }
+.do-header   { font-size: 11px; font-weight: 700; color: #008C31; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; }
+.dont-header { font-size: 11px; font-weight: 700; color: #F32735; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; }
+.do-item, .dont-item {
+  font-size: 13px; line-height: 1.5; margin-bottom: 6px;
+  padding-left: 16px; position: relative; color: var(--body);
+}
+.do-item::before   { content: '✓'; position: absolute; left: 0; color: #008C31; font-weight: 700; }
+.dont-item::before { content: '✗'; position: absolute; left: 0; color: #F32735; font-weight: 700; }
+
+/* ── COPY EXAMPLES ── */
+.copy-pill {
+  display: inline-block;
+  background: var(--surface); border: 1px solid var(--divider);
+  border-radius: 8px; padding: 10px 16px;
+  font-size: 13px; color: var(--body); font-style: italic;
+  margin: 4px;
+}
+.copy-pill strong { font-style: normal; color: var(--navy); }
+
+/* ── GRADIENT PREVIEW ── */
+.grad-block {
+  height: 72px; border-radius: 10px;
+  display: flex; align-items: center; padding: 0 20px;
+  margin-bottom: 8px;
+}
+.grad-label { font-family: 'Exo', sans-serif; font-size: 13px; font-weight: 700; color: white; }
+
+/* ── LEVEL BAR ── */
+.level-bar-wrap { background: #F0F0F0; border-radius: 99px; height: 8px; margin: 8px 0; overflow: hidden; }
+.level-bar-fill { height: 100%; border-radius: 99px; background: var(--grad); }
+
+/* ── AVATAR ── */
+.avatar {
+  border-radius: 50%; background: var(--grad);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; color: white;
+}
+
+/* ── DIVIDER ── */
+.section-divider {
+  height: 1px; background: var(--divider); margin: 32px 0;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,.15); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════ SIDEBAR ══════════════ -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <svg width="100" height="24" viewBox="0 0 283 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M83.859 50.255V45.328L97.002 25.126H83.859V19.621H104.46V24.506L91.317 44.747H104.46V50.251H83.859Z" fill="white"/>
+      <path d="M215.09 50.255V19.625H227.081C230.101 19.625 232.307 20.323 233.695 21.717C235.083 23.111 235.777 25.091 235.777 27.656C235.777 28.87 235.606 29.942 235.263 30.863C234.92 31.788 234.432 32.545 233.802 33.139C233.168 33.733 232.414 34.142 231.536 34.362C232.196 34.525 232.834 34.792 233.451 35.149C234.068 35.506 234.633 35.993 235.139 36.6C235.649 37.206 236.047 37.947 236.334 38.816C236.621 39.685 236.767 40.684 236.767 41.816C236.767 43.886 236.415 45.543 235.717 46.782C235.019 48.026 233.986 48.913 232.628 49.451C231.27 49.989 229.6 50.26 227.62 50.26H215.094Z" fill="white" opacity=".6"/>
+      <path d="M67.785 0H22.844C10.432 0 0.373 10.003 0.373 22.346H45.046V44.963L67.789 22.346V0Z" fill="url(#sg0)"/>
+      <path d="M23.116 22.346L0.373 44.963V67.309H45.314C57.726 67.309 67.785 57.306 67.785 44.963H23.116V22.346Z" fill="url(#sg1)"/>
+      <defs>
+        <linearGradient id="sg0" x1="55.87" y1="20.02" x2="20.80" y2="43.50" gradientUnits="userSpaceOnUse"><stop stop-color="#CCD32A"/><stop offset="0.845" stop-color="#029ECB"/></linearGradient>
+        <linearGradient id="sg1" x1="55.86" y1="42.37" x2="20.80" y2="65.84" gradientUnits="userSpaceOnUse"><stop stop-color="#CCD32A"/><stop offset="0.845" stop-color="#029ECB"/></linearGradient>
+      </defs>
+    </svg>
+    <span class="sidebar-logo-badge">Brand Bible</span>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-section-title">Fundamentos</div>
+    <a class="nav-item active" onclick="show('identidad')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 1 0 20 14.5 14.5 0 0 1 0-20"/><path d="M2 12h20"/></svg>
+      Identidad de marca
+    </a>
+    <a class="nav-item" onclick="show('colores')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+      Colores
+    </a>
+    <a class="nav-item" onclick="show('tipografia')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+      Tipografía
+    </a>
+    <a class="nav-item" onclick="show('logo')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      Logo y símbolo
+    </a>
+
+    <div class="nav-section-title">Componentes</div>
+    <a class="nav-item" onclick="show('botones')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="10" rx="5"/></svg>
+      Botones y CTAs
+    </a>
+    <a class="nav-item" onclick="show('badges')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      Badges y estados
+    </a>
+    <a class="nav-item" onclick="show('iconografia')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      Iconografía
+    </a>
+    <a class="nav-item" onclick="show('espaciado')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg>
+      Espaciado y layout
+    </a>
+
+    <div class="nav-section-title">Visual</div>
+    <a class="nav-item" onclick="show('fotografia')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+      Fotografía e ilustración
+    </a>
+    <a class="nav-item" onclick="show('voz')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Voz y tono
+    </a>
+    <a class="nav-item" onclick="show('dodont')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+      Do's &amp; Don'ts
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    ZenderBox Brand Bible<br>
+    Versión 1.0 · 2026<br><br>
+    Para IAs: apunta a<br>
+    <code style="color:rgba(255,255,255,.5);font-size:10px">BRAND.md</code>
+  </div>
+</aside>
+
+<!-- ══════════════ MAIN ══════════════ -->
+<main class="main">
+  <div class="topbar">
+    <span class="topbar-title" id="topbar-title">Identidad de marca</span>
+    <span class="topbar-badge">Principio core: White First</span>
+  </div>
+  <div class="content">
+
+    <!-- ════════════════════════════════
+         IDENTIDAD DE MARCA
+    ════════════════════════════════ -->
+    <div id="sec-identidad" class="section active">
+      <div class="page-header">
+        <div class="page-eyebrow">Brand Bible · ZenderBox</div>
+        <h1 class="page-title">Identidad de marca</h1>
+        <p class="page-desc">ZenderBox conecta a latinoamericanos con el comercio global. La identidad refleja accesibilidad, confianza y el poder de traer el mundo a tu puerta.</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">El servicio</div>
+          <p style="font-size:14px;line-height:1.7;color:var(--soft);margin-bottom:16px">Package-forwarding para clientes latinoamericanos. Cada usuario recibe una dirección física en Miami y gestiona sus paquetes desde la app o el dashboard.</p>
+          <div style="background:var(--surface);border-radius:10px;padding:16px">
+            <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-bottom:8px">Dirección de referencia</div>
+            <div style="font-family:monospace;font-size:13px;color:var(--navy);font-weight:700;line-height:1.6">
+              Juan Sebastian Acuna<br>
+              7971 NW 21 ST, Apto ZB-123301<br>
+              Doral, FL 33198 · USA
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Principio core</div>
+          <div style="background:linear-gradient(135deg,#CCD32A 0%,#029ECB 100%);border-radius:10px;padding:24px;margin-bottom:16px">
+            <div style="font-family:'Exo',sans-serif;font-size:22px;font-weight:800;color:white;line-height:1.2">White First</div>
+            <div style="font-size:13px;color:rgba(255,255,255,.8);margin-top:8px;line-height:1.5">El fondo dominante es siempre blanco. El gradiente y los colores de marca se reservan para acciones, accents y momentos de impacto.</div>
+          </div>
+          <p style="font-size:13px;color:var(--soft);line-height:1.6">El gradiente tiene fuerza porque se usa poco. Nunca como fondo de secciones de contenido extenso.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Personalidad de marca</div>
+        <div class="grid-4">
+          <div style="text-align:center;padding:20px 12px;background:var(--surface);border-radius:10px">
+            <div style="font-family:'Exo',sans-serif;font-size:15px;font-weight:800;color:var(--navy);margin-bottom:8px">Empoderador</div>
+            <div style="font-size:12px;color:var(--soft);line-height:1.5">Da acceso a lo que antes era solo para otros. No explica — habilita.</div>
+          </div>
+          <div style="text-align:center;padding:20px 12px;background:var(--surface);border-radius:10px">
+            <div style="font-family:'Exo',sans-serif;font-size:15px;font-weight:800;color:var(--navy);margin-bottom:8px">Transparente</div>
+            <div style="font-size:12px;color:var(--soft);line-height:1.5">Sin costos ocultos, sin letra chica. Directo sobre lo que cuesta.</div>
+          </div>
+          <div style="text-align:center;padding:20px 12px;background:var(--surface);border-radius:10px">
+            <div style="font-family:'Exo',sans-serif;font-size:15px;font-weight:800;color:var(--navy);margin-bottom:8px">Práctico</div>
+            <div style="font-size:12px;color:var(--soft);line-height:1.5">Va al grano. Dice cómo funciona y qué necesita hacer el usuario.</div>
+          </div>
+          <div style="text-align:center;padding:20px 12px;background:var(--surface);border-radius:10px">
+            <div style="font-family:'Exo',sans-serif;font-size:15px;font-weight:800;color:var(--navy);margin-bottom:8px">Cercano</div>
+            <div style="font-size:12px;color:var(--soft);line-height:1.5">Habla como la gente. Colombiano sin ser regional — LATAM.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Productos cubiertos</div>
+        <div class="grid-3">
+          <div style="border:1px solid var(--divider);border-radius:10px;padding:20px">
+            <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);margin-bottom:6px">App móvil</div>
+            <div style="font-family:'Exo',sans-serif;font-size:16px;font-weight:700;color:var(--navy);margin-bottom:8px">iOS · Android</div>
+            <div style="font-size:12px;color:var(--soft);line-height:1.5">Canvas 430×932px · Plus Jakarta Sans únicamente · Radius cards 10px · Botones 8px</div>
+          </div>
+          <div style="border:1px solid var(--divider);border-radius:10px;padding:20px">
+            <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);margin-bottom:6px">Dashboard web</div>
+            <div style="font-family:'Exo',sans-serif;font-size:16px;font-weight:700;color:var(--navy);margin-bottom:8px">Gestión</div>
+            <div style="font-size:12px;color:var(--soft);line-height:1.5">Rail 305px + contenido · Container 1286px · Mismo DS que la app</div>
+          </div>
+          <div style="border:1px solid var(--divider);border-radius:10px;padding:20px">
+            <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);margin-bottom:6px">Web pública</div>
+            <div style="font-family:'Exo',sans-serif;font-size:16px;font-weight:700;color:var(--navy);margin-bottom:8px">Landing</div>
+            <div style="font-size:12px;color:var(--soft);line-height:1.5">1512px desktop · Exo + Jakarta · Radius cards 24px · Botones 900px</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════
+         COLORES
+    ════════════════════════════════ -->
+    <div id="sec-colores" class="section">
+      <div class="page-header">
+        <div class="page-eyebrow">Fundamentos</div>
+        <h1 class="page-title">Colores</h1>
+        <p class="page-desc">Paleta mínima y de alto impacto. Cyan y lime son los colores de marca; el gradiente se construye de su combinación.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Colores primarios de marca</div>
+        <div class="grid-4">
+          <div class="color-swatch">
+            <div class="swatch-preview" style="background:#029ECB">
+              <span class="swatch-chip">Primary</span>
+            </div>
+            <div class="swatch-body">
+              <div class="swatch-name">Cyan</div>
+              <div class="swatch-hex">#029ECB</div>
+              <div class="swatch-use">Botones, CTAs, links, tab activo, bordes focused</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-preview" style="background:#CCD32A">
+              <span class="swatch-chip" style="background:rgba(0,0,0,.15);color:var(--navy)">Accent</span>
+            </div>
+            <div class="swatch-body">
+              <div class="swatch-name">Lime</div>
+              <div class="swatch-hex">#CCD32A</div>
+              <div class="swatch-use">Gradiente, barras de nivel, accents</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-preview" style="background:#004B72">
+              <span class="swatch-chip">Navy</span>
+            </div>
+            <div class="swatch-body">
+              <div class="swatch-name">Navy</div>
+              <div class="swatch-hex">#004B72</div>
+              <div class="swatch-use">Texto principal, encabezados, footer, navbar</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-preview" style="background:#007B9F">
+              <span class="swatch-chip">Dark</span>
+            </div>
+            <div class="swatch-body">
+              <div class="swatch-name">Dark cyan</div>
+              <div class="swatch-hex">#007B9F</div>
+              <div class="swatch-use">Hover, pressed, link secundario</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Gradientes</div>
+        <div class="grad-block" style="background:linear-gradient(45deg,#029ECB 0%,#CCD32A 85%)">
+          <span class="grad-label">App / Dashboard — 45deg, cyan → lime</span>
+        </div>
+        <div class="grad-block" style="background:linear-gradient(90deg,#CCD32A 0%,#029ECB 85%)">
+          <span class="grad-label">Web pública — 90deg, lime → cyan</span>
+        </div>
+        <div class="grad-block" style="background:linear-gradient(135deg,#CCD32A 0%,#029ECB 100%)">
+          <span class="grad-label">Hero sections — 135deg, lime → cyan</span>
+        </div>
+        <div class="code-block">
+<span class="c">/* App/Dashboard */</span>
+<span class="p">--grad:</span>     <span class="s">linear-gradient(45deg,  #029ECB 0%, #CCD32A 85%)</span>;
+<span class="c">/* Web pública */</span>
+<span class="p">--grad-web:</span> <span class="s">linear-gradient(90deg,  #CCD32A 0%, #029ECB 85%)</span>;
+<span class="c">/* Hero sections */</span>
+<span class="p">--grad-hero:</span><span class="s">linear-gradient(135deg, #CCD32A 0%, #029ECB 100%)</span>;
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Escala de neutros</div>
+        <div class="grid-4">
+          <div class="color-swatch"><div class="swatch-preview" style="background:#1F1F1F"></div><div class="swatch-body"><div class="swatch-name">Muy oscuro</div><div class="swatch-hex">#1F1F1F</div><div class="swatch-use">Texto display</div></div></div>
+          <div class="color-swatch"><div class="swatch-preview" style="background:#333333"></div><div class="swatch-body"><div class="swatch-name">Body</div><div class="swatch-hex">#333333</div><div class="swatch-use">Texto principal</div></div></div>
+          <div class="color-swatch"><div class="swatch-preview" style="background:#666666"></div><div class="swatch-body"><div class="swatch-name">Secundario</div><div class="swatch-hex">#666666</div><div class="swatch-use">Descripciones</div></div></div>
+          <div class="color-swatch"><div class="swatch-preview" style="background:#8A8A8A"></div><div class="swatch-body"><div class="swatch-name">Medio</div><div class="swatch-hex">#8A8A8A</div><div class="swatch-use">Deshabilitado</div></div></div>
+          <div class="color-swatch"><div class="swatch-preview" style="background:#B8B8B8"></div><div class="swatch-body"><div class="swatch-name">Placeholder</div><div class="swatch-hex">#B8B8B8</div><div class="swatch-use">Input placeholder</div></div></div>
+          <div class="color-swatch"><div class="swatch-preview" style="background:#DBDBDB"></div><div class="swatch-body"><div class="swatch-name">Divisores</div><div class="swatch-hex">#DBDBDB</div><div class="swatch-use">Líneas divisoras</div></div></div>
+          <div class="color-swatch"><div class="swatch-preview" style="background:#F6F6F6;border:1px solid var(--divider)"></div><div class="swatch-body"><div class="swatch-name">Surface</div><div class="swatch-hex">#F6F6F6</div><div class="swatch-use">Fondo app, disabled</div></div></div>
+          <div class="color-swatch"><div class="swatch-preview" style="background:#FFFFFF;border:1px solid var(--divider)"></div><div class="swatch-body"><div class="swatch-name">White</div><div class="swatch-hex">#FFFFFF</div><div class="swatch-use">Fondo dominante</div></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Estados semánticos de paquete</div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px">
+          <span class="state-badge sb-tienda">En Tienda</span>
+          <span class="state-badge sb-bodega">En Bodega</span>
+          <span class="state-badge sb-despachado">Despachado</span>
+          <span class="state-badge sb-camino">En Camino</span>
+          <span class="state-badge sb-entregado">Entregado</span>
+        </div>
+        <div class="grid-3" style="gap:10px">
+          <div style="padding:12px;border-radius:8px;background:#E8F0FB;border:1px solid rgba(2,96,203,.2)"><span style="font-size:11px;font-weight:700;color:#0260CB">EN TIENDA</span><div style="font-size:10px;color:#0260CB;margin-top:2px;opacity:.7">Texto #0260CB · Fondo #E8F0FB</div></div>
+          <div style="padding:12px;border-radius:8px;background:#F1F6F5;border:1px solid rgba(0,140,49,.2)"><span style="font-size:11px;font-weight:700;color:#008C31">EN BODEGA</span><div style="font-size:10px;color:#008C31;margin-top:2px;opacity:.7">Texto #008C31 · Fondo #F1F6F5</div></div>
+          <div style="padding:12px;border-radius:8px;background:#FDF3EA;border:1px solid rgba(230,107,0,.2)"><span style="font-size:11px;font-weight:700;color:#E66B00">DESPACHADO</span><div style="font-size:10px;color:#E66B00;margin-top:2px;opacity:.7">Texto #E66B00 · Fondo #FDF3EA</div></div>
+          <div style="padding:12px;border-radius:8px;background:#F4E8E9;border:1px solid rgba(243,39,53,.2)"><span style="font-size:11px;font-weight:700;color:#F32735">EN CAMINO</span><div style="font-size:10px;color:#F32735;margin-top:2px;opacity:.7">Texto #F32735 · Fondo #F4E8E9</div></div>
+          <div style="padding:12px;border-radius:8px;background:#FDE8FB;border:1px solid rgba(255,40,226,.2)"><span style="font-size:11px;font-weight:700;color:#FF28E2">ENTREGADO</span><div style="font-size:10px;color:#FF28E2;margin-top:2px;opacity:.7">Texto #FF28E2 · Fondo #FDE8FB</div></div>
+          <div style="padding:12px;border-radius:8px;background:#FFF5F5;border:1px solid rgba(243,39,53,.2)"><span style="font-size:11px;font-weight:700;color:#F32735">ERROR (APP)</span><div style="font-size:10px;color:var(--mid);margin-top:2px">#F32735 (app) · #CC1111 (web)</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════
+         TIPOGRAFÍA
+    ════════════════════════════════ -->
+    <div id="sec-tipografia" class="section">
+      <div class="page-header">
+        <div class="page-eyebrow">Fundamentos</div>
+        <h1 class="page-title">Tipografía</h1>
+        <p class="page-desc">App y Dashboard usan Plus Jakarta Sans exclusivamente. La web pública añade Exo para titulares y botones.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Plus Jakarta Sans — App y Dashboard</div>
+        <div style="margin-bottom:20px">
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:48px;font-weight:700;color:var(--navy);line-height:1">Plus Jakarta Sans</div>
+          <div style="font-size:13px;color:var(--mid);margin-top:8px">Pesos usados: 500 (Medium) · 700 (Bold) · 800 (ExtraBold — solo código de referido)</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-label">Display L</div><div class="type-spec">Bold 700 · 32/38</div></div>
+          <div class="type-preview" style="font-family:'Plus Jakarta Sans';font-size:32px;font-weight:700;line-height:1.18;color:var(--navy)">Mis paquetes</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-label">Display</div><div class="type-spec">Bold 700 · 24/32</div></div>
+          <div class="type-preview" style="font-family:'Plus Jakarta Sans';font-size:24px;font-weight:700;color:var(--navy)">Agregar paquete</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-label">Section Title</div><div class="type-spec">Bold 700 · 19/24</div></div>
+          <div class="type-preview" style="font-family:'Plus Jakarta Sans';font-size:19px;font-weight:700;color:var(--navy)">Mis datos en EE.UU.</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-label">Title</div><div class="type-spec">Bold 700 · 16/20</div></div>
+          <div class="type-preview" style="font-family:'Plus Jakarta Sans';font-size:16px;font-weight:700;color:var(--navy)">Auriculares Sony WH-1000XM5</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-label">Button</div><div class="type-spec">ExtraBold 800 · 16/20</div></div>
+          <div class="type-preview" style="font-family:'Plus Jakarta Sans';font-size:16px;font-weight:800;color:var(--cyan)">Agregar paquete</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-label">Body</div><div class="type-spec">Medium 500 · 14/18</div></div>
+          <div class="type-preview" style="font-family:'Plus Jakarta Sans';font-size:14px;font-weight:500;color:var(--body)">Usa esta dirección exactamente como aparece en todas tus compras online.</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-label">Label</div><div class="type-spec">Bold 700 · 12/15</div></div>
+          <div class="type-preview" style="font-family:'Plus Jakarta Sans';font-size:12px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.06em">Descripción del paquete</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-label">Caption / Tag</div><div class="type-spec">Medium 500 · 10/13</div></div>
+          <div class="type-preview" style="font-family:'Plus Jakarta Sans';font-size:10px;font-weight:500;color:var(--mid)">Amazon · $349.00 USD · hace 2 días</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Exo — Web pública (titulares y botones)</div>
+        <div style="margin-bottom:20px">
+          <div style="font-family:'Exo',sans-serif;font-size:48px;font-weight:800;color:var(--navy);line-height:1">Exo Display</div>
+          <div style="font-size:13px;color:var(--mid);margin-top:8px">Solo en la web pública. Nunca en la app o dashboard. Pesos: 400, 600, 700, 800.</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-label">Display</div><div class="type-spec">Exo Bold · 67/77</div></div>
+          <div class="type-preview" style="font-family:'Exo';font-size:40px;font-weight:800;color:var(--navy)">El mundo, en tu puerta.</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-label">Title</div><div class="type-spec">Exo Bold · 44/54</div></div>
+          <div class="type-preview" style="font-family:'Exo';font-size:32px;font-weight:700;color:var(--navy)">Trae lo que quieras</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-label">Button web</div><div class="type-spec">Exo Bold · 18/24 · UPPERCASE</div></div>
+          <div class="type-preview" style="font-family:'Exo';font-size:18px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--cyan)">ABRIR MI CASILLERO GRATIS</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-label">Body</div><div class="type-spec">Jakarta Regular · 18/24</div></div>
+          <div class="type-preview" style="font-family:'Plus Jakarta Sans';font-size:16px;font-weight:400;color:var(--soft)">Trae a Colombia los productos que quieras desde donde quieras.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════
+         LOGO
+    ════════════════════════════════ -->
+    <div id="sec-logo" class="section">
+      <div class="page-header">
+        <div class="page-eyebrow">Identidad</div>
+        <h1 class="page-title">Logo y símbolo</h1>
+        <p class="page-desc">El wordmark combina "Zender" en cyan y "Box" en lime. El símbolo son dos piezas que forman Z/B usando el gradiente.</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">Logo color — fondos claros</div>
+          <div style="background:white;border-radius:10px;padding:32px;display:flex;align-items:center;justify-content:center;border:1px solid var(--divider)">
+            <svg width="200" height="48" viewBox="0 0 283 68" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M83.859 50.255V45.328L97.002 25.126H83.859V19.621H104.46V24.506L91.317 44.747H104.46V50.251H83.859Z" fill="#029ECB"/><path d="M116.987 50.462C114.541 50.462 112.591 50.139 111.135 49.489C109.678 48.84 108.629 47.69 107.982 46.033C107.335 44.377 107.014 42.087 107.014 39.16C107.014 36.234 107.314 33.819 107.922 32.167C108.526 30.51 109.541 29.352 110.972 28.689C112.399 28.026 114.335 27.695 116.781 27.695C118.979 27.695 120.735 27.914 122.055 28.358C123.374 28.801 124.325 29.571 124.916 30.678C125.508 31.784 125.803 33.342 125.803 35.356C125.803 36.845 125.508 38.024 124.916 38.893C124.325 39.763 123.494 40.383 122.423 40.757C121.352 41.131 120.088 41.317 118.632 41.317H113.071C113.127 42.448 113.298 43.352 113.585 44.028C113.872 44.704 114.408 45.186 115.192 45.478C115.976 45.767 117.107 45.913 118.593 45.913H125.062V49.515C123.991 49.735 122.817 49.95 121.541 50.157C120.264 50.363 118.743 50.466 116.987 50.466Z" fill="#029ECB"/><path d="M215.09 50.255V19.625H227.081C230.101 19.625 232.307 20.323 233.695 21.717C235.083 23.111 235.777 25.091 235.777 27.656C235.777 28.87 235.606 29.942 235.263 30.863C234.92 31.788 234.432 32.545 233.802 33.139C233.168 33.733 232.414 34.142 231.536 34.362C232.196 34.525 232.834 34.792 233.451 35.149C234.068 35.506 234.633 35.993 235.139 36.6C235.649 37.206 236.047 37.947 236.334 38.816C236.621 39.685 236.767 40.684 236.767 41.816C236.767 43.886 236.415 45.543 235.717 46.782C235.019 48.026 233.986 48.913 232.628 49.451C231.27 49.989 229.6 50.26 227.62 50.26H215.094Z" fill="#CCD32A"/><path d="M67.785 0H22.844C10.432 0 0.373 10.003 0.373 22.346H45.046V44.963L67.789 22.346V0Z" fill="url(#lg0)"/><path d="M23.116 22.346L0.373 44.963V67.309H45.314C57.726 67.309 67.785 57.306 67.785 44.963H23.116V22.346Z" fill="url(#lg1)"/><defs><linearGradient id="lg0" x1="55.87" y1="20.02" x2="20.80" y2="43.50" gradientUnits="userSpaceOnUse"><stop stop-color="#CCD32A"/><stop offset="0.845" stop-color="#029ECB"/></linearGradient><linearGradient id="lg1" x1="55.86" y1="42.37" x2="20.80" y2="65.84" gradientUnits="userSpaceOnUse"><stop stop-color="#CCD32A"/><stop offset="0.845" stop-color="#029ECB"/></linearGradient></defs></svg>
+          </div>
+          <div style="font-size:12px;color:var(--mid);margin-top:10px">"Zender" en cyan <code>#029ECB</code> · "Box" en lime <code>#CCD32A</code></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Logo blanco — fondos de color</div>
+          <div style="background:linear-gradient(135deg,#CCD32A,#029ECB);border-radius:10px;padding:32px;display:flex;align-items:center;justify-content:center">
+            <svg width="200" height="48" viewBox="0 0 283 68" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M83.859 50.255V45.328L97.002 25.126H83.859V19.621H104.46V24.506L91.317 44.747H104.46V50.251H83.859Z" fill="white"/><path d="M215.09 50.255V19.625H227.081C230.101 19.625 232.307 20.323 233.695 21.717C235.083 23.111 235.777 25.091 235.777 27.656C235.777 28.87 235.606 29.942 235.263 30.863C234.92 31.788 234.432 32.545 233.802 33.139C233.168 33.733 232.414 34.142 231.536 34.362C232.196 34.525 232.834 34.792 233.451 35.149C234.068 35.506 234.633 35.993 235.139 36.6C235.649 37.206 236.047 37.947 236.334 38.816C236.621 39.685 236.767 40.684 236.767 41.816C236.767 43.886 236.415 45.543 235.717 46.782C235.019 48.026 233.986 48.913 232.628 49.451C231.27 49.989 229.6 50.26 227.62 50.26H215.094Z" fill="white"/><path d="M67.785 0H22.844C10.432 0 0.373 10.003 0.373 22.346H45.046V44.963L67.789 22.346V0Z" fill="white"/><path d="M23.116 22.346L0.373 44.963V67.309H45.314C57.726 67.309 67.785 57.306 67.785 44.963H23.116V22.346Z" fill="white"/></svg>
+          </div>
+          <div style="font-size:12px;color:var(--mid);margin-top:10px">Usar sobre cyan, gradiente o fondos oscuros</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Reglas de uso</div>
+        <div class="do-dont-grid">
+          <div class="do-card">
+            <div class="do-header">✓ Correcto</div>
+            <div class="do-item">Logo color sobre fondos blancos y claros</div>
+            <div class="do-item">Logo blanco sobre gradiente y fondos cyan</div>
+            <div class="do-item">Espacio mínimo: 16px alrededor del símbolo</div>
+            <div class="do-item">Proporciones originales del SVG siempre</div>
+          </div>
+          <div class="dont-card">
+            <div class="dont-header">✗ Prohibido</div>
+            <div class="dont-item">Recolorear el wordmark o el símbolo</div>
+            <div class="dont-item">Estirar o comprimir el logo</div>
+            <div class="dont-item">Usar sobre fondos que reducen legibilidad</div>
+            <div class="dont-item">Separar el símbolo del wordmark (salvo favicon)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════
+         BOTONES
+    ════════════════════════════════ -->
+    <div id="sec-botones" class="section">
+      <div class="page-header">
+        <div class="page-eyebrow">Componentes</div>
+        <h1 class="page-title">Botones y CTAs</h1>
+        <p class="page-desc">App y web tienen sistemas de botones distintos. El tamaño, radio y familia tipográfica cambian entre productos.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">App / Dashboard — Plus Jakarta Sans</div>
+        <div class="btn-row">
+          <button class="btn-preview bp-primary">Agregar paquete</button>
+          <button class="btn-preview bp-secondary">Ver tracking</button>
+          <button class="btn-preview bp-stroke">Ver tarifas</button>
+          <button class="btn-preview bp-sm">Consolidar</button>
+        </div>
+        <div class="grid-3" style="gap:12px;margin-top:16px">
+          <div style="background:var(--surface);border-radius:8px;padding:14px">
+            <div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:6px">Primary</div>
+            <div style="font-size:11px;font-family:monospace;color:var(--soft);line-height:1.6">grad 45deg · h52 · r8<br>Plus Jakarta ExtraBold 800</div>
+          </div>
+          <div style="background:var(--surface);border-radius:8px;padding:14px">
+            <div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:6px">Secondary</div>
+            <div style="font-size:11px;font-family:monospace;color:var(--soft);line-height:1.6">#029ECB · h52 · r8<br>Plus Jakarta Bold 700</div>
+          </div>
+          <div style="background:var(--surface);border-radius:8px;padding:14px">
+            <div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:6px">Stroke</div>
+            <div style="font-size:11px;font-family:monospace;color:var(--soft);line-height:1.6">#F6F6F6 + 1px #007B9F · h52 · r8<br>Plus Jakarta Bold 700</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Web pública — Exo Bold UPPERCASE · radius 900px</div>
+        <div class="btn-row">
+          <button class="btn-preview bp-web-primary">ABRIR MI CASILLERO GRATIS</button>
+          <button class="btn-preview bp-web-secondary">VER TARIFAS</button>
+          <button class="btn-preview bp-web-tertiary">SABER MÁS</button>
+        </div>
+        <div class="code-block" style="margin-top:16px">
+<span class="c">/* Primary web */</span>
+<span class="p">background:</span> <span class="s">linear-gradient(90deg, #CCD32A 0%, #029ECB 85%)</span>;
+<span class="p">font-family:</span> <span class="s">'Exo', sans-serif</span>; <span class="p">font-weight:</span> <span class="s">700</span>; <span class="p">text-transform:</span> <span class="s">uppercase</span>;
+<span class="p">border-radius:</span> <span class="s">900px</span>; <span class="p">height:</span> <span class="s">54px</span>; <span class="p">padding:</span> <span class="s">0 40px</span>;
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Interacciones — aplica a todos</div>
+        <div class="grid-3" style="gap:12px">
+          <div style="background:var(--surface);border-radius:8px;padding:14px">
+            <div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:4px">Default</div>
+            <div style="font-size:11px;font-family:monospace;color:var(--soft)">Estado base</div>
+          </div>
+          <div style="background:var(--surface);border-radius:8px;padding:14px">
+            <div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:4px">Hover</div>
+            <div style="font-size:11px;font-family:monospace;color:var(--soft)">filter: brightness(1.05)<br>150ms ease</div>
+          </div>
+          <div style="background:var(--surface);border-radius:8px;padding:14px">
+            <div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:4px">Press / Active</div>
+            <div style="font-size:11px;font-family:monospace;color:var(--soft)">transform: scale(0.98)<br>brightness(0.95)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════
+         BADGES Y ESTADOS
+    ════════════════════════════════ -->
+    <div id="sec-badges" class="section">
+      <div class="page-header">
+        <div class="page-eyebrow">Componentes</div>
+        <h1 class="page-title">Badges y estados</h1>
+        <p class="page-desc">Los state badges son el lenguaje visual del tracking de paquetes. Cada estado tiene su propio par texto/fondo.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">State Badges — estados de paquete</div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px">
+          <span class="state-badge sb-tienda">En Tienda</span>
+          <span class="state-badge sb-bodega">En Bodega</span>
+          <span class="state-badge sb-despachado">Despachado</span>
+          <span class="state-badge sb-camino">En Camino</span>
+          <span class="state-badge sb-entregado">Entregado</span>
+        </div>
+        <div class="code-block">
+<span class="c">/* Shared structure */</span>
+<span class="p">border-radius:</span> <span class="s">99px</span>; <span class="p">font-size:</span> <span class="s">10px</span>; <span class="p">font-weight:</span> <span class="s">700</span>;
+<span class="p">letter-spacing:</span> <span class="s">0.06em</span>; <span class="p">text-transform:</span> <span class="s">uppercase</span>; <span class="p">padding:</span> <span class="s">4px 12px</span>;
+<span class="p">border:</span> <span class="s">1px solid &lt;color-with-opacity&gt;</span>;
+
+<span class="c">/* En Bodega */</span>
+<span class="p">color:</span> <span class="s">#008C31</span>; <span class="p">background:</span> <span class="s">#F1F6F5</span>; <span class="p">border-color:</span> <span class="s">rgba(0,140,49,.2)</span>;
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Badges genéricos y gamificación</div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:20px">
+          <span style="background:var(--grad);color:white;border-radius:99px;font-size:11px;font-weight:700;padding:5px 14px">Nivel Básico</span>
+          <span style="background:#EFF9FC;color:var(--cyan);border:1px solid rgba(2,158,203,.2);border-radius:99px;font-size:11px;font-weight:700;padding:5px 14px">Cyan</span>
+          <span style="background:#F8FCE6;color:#7A8017;border:1px solid rgba(204,211,42,.3);border-radius:99px;font-size:11px;font-weight:700;padding:5px 14px">Lime</span>
+          <span style="background:#F0FDF4;color:#008C31;border:1px solid rgba(0,140,49,.2);border-radius:99px;font-size:11px;font-weight:700;padding:5px 14px">Activo</span>
+          <span style="background:#FFFBEB;color:#D97706;border:1px solid rgba(217,119,6,.2);border-radius:99px;font-size:11px;font-weight:700;padding:5px 14px">Pendiente</span>
+        </div>
+        <div style="background:var(--surface);border-radius:10px;padding:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:12px">Barra de nivel</div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+            <div class="avatar" style="width:44px;height:44px;font-size:16px">JA</div>
+            <div style="flex:1">
+              <div style="font-size:13px;font-weight:700;color:var(--navy)">Juan Sebastian Acuna</div>
+              <div style="font-size:11px;color:var(--mid)">Nivel Básico · 1.678 / 2.000 puntos</div>
+            </div>
+          </div>
+          <div class="level-bar-wrap"><div class="level-bar-fill" style="width:84%"></div></div>
+          <div style="font-size:10px;color:var(--mid);text-align:right;margin-top:4px">322 puntos para Nivel Plata</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════
+         ICONOGRAFÍA
+    ════════════════════════════════ -->
+    <div id="sec-iconografia" class="section">
+      <div class="page-header">
+        <div class="page-eyebrow">Componentes</div>
+        <h1 class="page-title">Iconografía</h1>
+        <p class="page-desc">Set basado en Lucide. Stroke 1.8px uniforme, tamaño 18×18px por defecto. Sin fills — solo outline.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Set principal</div>
+        <div class="icon-grid">
+          <div class="icon-item"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg><span>chevron-right</span></div>
+          <div class="icon-item"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg><span>chevron-left</span></div>
+          <div class="icon-item"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg><span>x / cerrar</span></div>
+          <div class="icon-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>help-circle</span></div>
+          <div class="icon-item"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span>search</span></div>
+          <div class="icon-item"><svg viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h18"/></svg><span>menu</span></div>
+          <div class="icon-item"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg><span>package</span></div>
+          <div class="icon-item"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><span>tracking</span></div>
+          <div class="icon-item"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg><span>cart</span></div>
+          <div class="icon-item"><svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg><span>consolidar</span></div>
+          <div class="icon-item"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>perfil</span></div>
+          <div class="icon-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>direcciones</span></div>
+          <div class="icon-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>referidos</span></div>
+          <div class="icon-item"><svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg><span>categoría</span></div>
+          <div class="icon-item"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><span>dinero</span></div>
+          <div class="icon-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>seguro</span></div>
+          <div class="icon-item"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>soporte</span></div>
+          <div class="icon-item"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg><span>app móvil</span></div>
+        </div>
+        <div style="margin-top:16px;padding:12px;background:var(--surface);border-radius:8px;font-size:12px;color:var(--soft)">
+          <strong>Convenciones:</strong> Stroke 1.8px · Tamaño 18×18px · Color hereda del contexto · Sin fill · CDN: unpkg.com/lucide@latest
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Categorías de paquetes</div>
+        <div style="display:flex;gap:16px;flex-wrap:wrap">
+          <div style="display:flex;align-items:center;gap:8px;background:var(--surface);border-radius:8px;padding:10px 14px">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"/></svg>
+            <span style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--soft)">MODA</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;background:var(--surface);border-radius:8px;padding:10px 14px">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            <span style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--soft)">TECNOLOGÍA</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;background:var(--surface);border-radius:8px;padding:10px 14px">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <span style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--soft)">HOGAR</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;background:var(--surface);border-radius:8px;padding:10px 14px">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+            <span style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--soft)">BELLEZA</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;background:var(--surface);border-radius:8px;padding:10px 14px">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M18.5 14V8l-3.5-3-4.5 5.5 3.5 3.5 4.5-1z"/></svg>
+            <span style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--soft)">DEPORTES</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════
+         ESPACIADO
+    ════════════════════════════════ -->
+    <div id="sec-espaciado" class="section">
+      <div class="page-header">
+        <div class="page-eyebrow">Layout</div>
+        <h1 class="page-title">Espaciado y layout</h1>
+        <p class="page-desc">Escala de espaciado basada en múltiplos de 4. App, dashboard y web tienen grids distintos.</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">Tokens de spacing — App</div>
+          <div class="spacing-row"><div class="spacing-block" style="width:2px"></div><div class="spacing-label">xxxs = 2px</div><div class="spacing-desc">Microgap entre iconos y texto</div></div>
+          <div class="spacing-row"><div class="spacing-block" style="width:4px"></div><div class="spacing-label">xxs = 4px</div><div class="spacing-desc">Gap badges, dots</div></div>
+          <div class="spacing-row"><div class="spacing-block" style="width:8px"></div><div class="spacing-label">xs = 8px</div><div class="spacing-desc">Gap elementos inline</div></div>
+          <div class="spacing-row"><div class="spacing-block" style="width:10px"></div><div class="spacing-label">sm = 10px</div><div class="spacing-desc">Padding small</div></div>
+          <div class="spacing-row"><div class="spacing-block" style="width:12px"></div><div class="spacing-label">m = 12px</div><div class="spacing-desc">Padding interno</div></div>
+          <div class="spacing-row"><div class="spacing-block" style="width:16px"></div><div class="spacing-label">md = 16px</div><div class="spacing-desc">Margen lateral pantalla</div></div>
+          <div class="spacing-row"><div class="spacing-block" style="width:20px"></div><div class="spacing-label">xl = 20px</div><div class="spacing-desc">Padding cards</div></div>
+          <div class="spacing-row"><div class="spacing-block" style="width:32px"></div><div class="spacing-label">xxl = 32px</div><div class="spacing-desc">Separación de secciones</div></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Radios por producto</div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;align-items:center;gap:16px">
+              <div style="width:48px;height:48px;background:var(--cyan);opacity:.15;border-radius:10px;flex-shrink:0"></div>
+              <div><div style="font-size:12px;font-weight:700;color:var(--navy)">Cards app/dashboard</div><div style="font-size:11px;font-family:monospace;color:var(--mid)">border-radius: 10px</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px">
+              <div style="width:48px;height:48px;background:var(--cyan);opacity:.15;border-radius:8px;flex-shrink:0"></div>
+              <div><div style="font-size:12px;font-weight:700;color:var(--navy)">Botones app / inputs</div><div style="font-size:11px;font-family:monospace;color:var(--mid)">border-radius: 8px</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px">
+              <div style="width:48px;height:24px;background:var(--cyan);opacity:.15;border-radius:99px;flex-shrink:0"></div>
+              <div><div style="font-size:12px;font-weight:700;color:var(--navy)">Avatares, badges, pills</div><div style="font-size:11px;font-family:monospace;color:var(--mid)">border-radius: 99px</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px">
+              <div style="width:48px;height:48px;background:var(--cyan);opacity:.15;border-radius:24px;flex-shrink:0"></div>
+              <div><div style="font-size:12px;font-weight:700;color:var(--navy)">Cards web pública</div><div style="font-size:11px;font-family:monospace;color:var(--mid)">border-radius: 24px</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px">
+              <div style="width:80px;height:36px;background:var(--cyan);opacity:.15;border-radius:900px;flex-shrink:0"></div>
+              <div><div style="font-size:12px;font-weight:700;color:var(--navy)">Botones web pública</div><div style="font-size:11px;font-family:monospace;color:var(--mid)">border-radius: 900px</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Grids y contenedores</div>
+        <div class="grid-3" style="gap:12px">
+          <div style="background:var(--surface);border-radius:8px;padding:16px">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--mid);margin-bottom:6px">App móvil</div>
+            <div style="font-family:monospace;font-size:11px;color:var(--navy);line-height:1.8">430×932px<br>Padding: 16px<br>Cards: 20px<br>Header: 130px fijo<br>Tab bar: 89px fijo</div>
+          </div>
+          <div style="background:var(--surface);border-radius:8px;padding:16px">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--mid);margin-bottom:6px">Dashboard web</div>
+            <div style="font-family:monospace;font-size:11px;color:var(--navy);line-height:1.8">Rail: 305px<br>Content padding: 24/40/64px<br>Container L: 1286px<br>Container M: 1068px<br>Container S: 630px</div>
+          </div>
+          <div style="background:var(--surface);border-radius:8px;padding:16px">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--mid);margin-bottom:6px">Web pública</div>
+            <div style="font-family:monospace;font-size:11px;color:var(--navy);line-height:1.8">Canvas: 1512px<br>Columna: 1286px<br>Gutters: 113px L/R<br>Mobile: 430px<br>Padding mobile: 16px</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════
+         FOTOGRAFÍA E ILUSTRACIÓN
+    ════════════════════════════════ -->
+    <div id="sec-fotografia" class="section">
+      <div class="page-header">
+        <div class="page-eyebrow">Dirección visual</div>
+        <h1 class="page-title">Fotografía e ilustración</h1>
+        <p class="page-desc">ZenderBox vive en el espacio entre el deseo y la llegada. Las imágenes deben capturar ese territorio emocional.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Los 4 territorios fotográficos</div>
+        <div class="grid-4">
+          <div style="text-align:center;padding:20px 12px;background:var(--surface);border-radius:10px">
+            <div style="font-size:28px;margin-bottom:8px">🛍</div>
+            <div style="font-family:'Exo',sans-serif;font-size:14px;font-weight:800;color:var(--navy);margin-bottom:6px">El deseo</div>
+            <div style="font-size:11px;color:var(--soft);line-height:1.5">Persona eligiendo, navegando, comprando online</div>
+          </div>
+          <div style="text-align:center;padding:20px 12px;background:var(--surface);border-radius:10px">
+            <div style="font-size:28px;margin-bottom:8px">📱</div>
+            <div style="font-family:'Exo',sans-serif;font-size:14px;font-weight:800;color:var(--navy);margin-bottom:6px">La espera activa</div>
+            <div style="font-size:11px;color:var(--soft);line-height:1.5">Tracking en el celular, anticipación con control</div>
+          </div>
+          <div style="text-align:center;padding:20px 12px;background:var(--surface);border-radius:10px">
+            <div style="font-size:28px;margin-bottom:8px">📦</div>
+            <div style="font-family:'Exo',sans-serif;font-size:14px;font-weight:800;color:var(--navy);margin-bottom:6px">La llegada</div>
+            <div style="font-size:11px;color:var(--soft);line-height:1.5">Unboxing, primer vistazo, integración del producto</div>
+          </div>
+          <div style="text-align:center;padding:20px 12px;background:var(--surface);border-radius:10px">
+            <div style="font-size:28px;margin-bottom:8px">💼</div>
+            <div style="font-family:'Exo',sans-serif;font-size:14px;font-weight:800;color:var(--navy);margin-bottom:6px">El emprendedor</div>
+            <div style="font-size:11px;color:var(--soft);line-height:1.5">Negocio personal, inventario pequeño, empoderamiento</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Ejemplos visuales</div>
+        <div class="grid-3">
+          <div>
+            <div class="photo-example">
+              <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=600&q=80" alt="El deseo" loading="lazy">
+              <div class="photo-overlay-ex"></div>
+              <div class="photo-caption-ex">
+                <div class="photo-tag-ex">Territorio 01</div>
+                <div class="photo-title-ex">El deseo</div>
+              </div>
+            </div>
+            <div style="font-size:11px;color:var(--mid);margin-top:8px;line-height:1.5">Luz natural · Tonos cálidos · Manos/productos en primer plano</div>
+          </div>
+          <div>
+            <div class="photo-example">
+              <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=600&q=80" alt="Emprendedora" loading="lazy">
+              <div class="photo-overlay-ex"></div>
+              <div class="photo-caption-ex">
+                <div class="photo-tag-ex">Territorio 04</div>
+                <div class="photo-title-ex">El emprendedor</div>
+              </div>
+            </div>
+            <div style="font-size:11px;color:var(--mid);margin-top:8px;line-height:1.5">Diversidad latina · Espacio de trabajo real · No posado</div>
+          </div>
+          <div>
+            <div style="height:280px;border-radius:16px;overflow:hidden;position:relative;background:linear-gradient(135deg,#CCD32A,#029ECB);display:flex;align-items:center;justify-content:center">
+              <div>
+                <div style="text-align:center;color:white">
+                  <div class="iso-wrap" style="background:transparent;height:auto;border-radius:0">
+                    <svg width="200" height="150" viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg">
+                      <g class="iso-anim">
+                        <ellipse cx="140" cy="162" rx="44" ry="9" fill="rgba(0,0,0,.15)"/>
+                        <polygon points="140,30 196,62 140,94 84,62" fill="#CCD32A"/>
+                        <polygon points="196,62 196,122 140,154 140,94" fill="#029ECB"/>
+                        <polygon points="140,94 140,154 84,122 84,62" fill="#007B9F"/>
+                      </g>
+                    </svg>
+                  </div>
+                  <div style="font-family:'Exo',sans-serif;font-size:14px;font-weight:700;margin-top:4px">Ilustración isométrica</div>
+                  <div style="font-size:11px;opacity:.8;margin-top:4px">Lime / Cyan / Dark cyan</div>
+                </div>
+              </div>
+            </div>
+            <div style="font-size:11px;color:var(--mid);margin-top:8px;line-height:1.5">Para pasos, onboarding y estados vacíos</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Overlays y glassmorphism</div>
+        <div class="grid-3">
+          <div style="background:var(--surface);border-radius:10px;padding:16px">
+            <div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:8px">Overlay texto sobre foto</div>
+            <div class="code-block" style="font-size:10px;margin-top:0">background:<br>linear-gradient(<br>  to top,<br>  rgba(0,0,0,.75) 0%,<br>  transparent 55%<br>);</div>
+          </div>
+          <div style="background:var(--surface);border-radius:10px;padding:16px">
+            <div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:8px">Glassmorphism claro</div>
+            <div class="code-block" style="font-size:10px;margin-top:0">background:<br>rgba(255,255,255,.1);<br>backdrop-filter:<br>  blur(16px);<br>border: 1px solid<br>rgba(255,255,255,.2);</div>
+          </div>
+          <div style="background:var(--surface);border-radius:10px;padding:16px">
+            <div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:8px">Glassmorphism oscuro</div>
+            <div class="code-block" style="font-size:10px;margin-top:0">background:<br>rgba(0,20,40,.65);<br>backdrop-filter:<br>  blur(16px);<br>border: 1px solid<br>rgba(255,255,255,.15);</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════
+         VOZ Y TONO
+    ════════════════════════════════ -->
+    <div id="sec-voz" class="section">
+      <div class="page-header">
+        <div class="page-eyebrow">Comunicación</div>
+        <h1 class="page-title">Voz y tono</h1>
+        <p class="page-desc">ZenderBox habla en español latinoamericano, tutea siempre. Directo, sin drama, sin corporativo.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Frases canónicas — usar exactamente así</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <span class="copy-pill"><strong>"Hola, Juan"</strong></span>
+          <span class="copy-pill"><strong>"Mis datos en Estados Unidos"</strong></span>
+          <span class="copy-pill"><strong>"Hazle seguimiento a tus compras"</strong></span>
+          <span class="copy-pill"><strong>"Consigue hasta 900 puntos"</strong></span>
+          <span class="copy-pill"><strong>"ABRIR MI CASILLERO GRATIS"</strong></span>
+          <span class="copy-pill"><strong>"El mundo entero, en tu puerta."</strong></span>
+          <span class="copy-pill"><strong>"Trae a Colombia los productos que quieras desde donde quieras."</strong></span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Casing por contexto</div>
+        <div class="grid-3" style="gap:12px">
+          <div style="background:var(--surface);border-radius:8px;padding:14px">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--cyan);margin-bottom:8px">Títulos de pantalla</div>
+            <div style="font-size:16px;font-weight:700;color:var(--navy)">Mis paquetes</div>
+            <div style="font-size:11px;color:var(--mid);margin-top:4px">Sentence case</div>
+          </div>
+          <div style="background:var(--surface);border-radius:8px;padding:14px">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--cyan);margin-bottom:8px">Botones app</div>
+            <div style="font-size:15px;font-weight:800;color:var(--navy)">Agregar paquete</div>
+            <div style="font-size:11px;color:var(--mid);margin-top:4px">Sentence case Bold</div>
+          </div>
+          <div style="background:var(--surface);border-radius:8px;padding:14px">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--cyan);margin-bottom:8px">Botones web</div>
+            <div style="font-family:'Exo',sans-serif;font-size:15px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.04em">ABRIR MI CASILLERO</div>
+            <div style="font-size:11px;color:var(--mid);margin-top:4px">UPPERCASE Exo Bold</div>
+          </div>
+          <div style="background:var(--surface);border-radius:8px;padding:14px">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--cyan);margin-bottom:8px">Badges</div>
+            <span class="state-badge sb-bodega">EN BODEGA</span>
+            <div style="font-size:11px;color:var(--mid);margin-top:6px">UPPERCASE always</div>
+          </div>
+          <div style="background:var(--surface);border-radius:8px;padding:14px">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--cyan);margin-bottom:8px">Moneda</div>
+            <div style="font-size:16px;font-weight:700;color:var(--navy)">$349.00 USD</div>
+            <div style="font-size:11px;color:var(--mid);margin-top:4px">Símbolo + espacio + USD</div>
+          </div>
+          <div style="background:var(--surface);border-radius:8px;padding:14px">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--cyan);margin-bottom:8px">Miles</div>
+            <div style="font-size:16px;font-weight:700;color:var(--navy)">1.678 puntos</div>
+            <div style="font-size:11px;color:var(--mid);margin-top:4px">Punto como separador</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Tono por momento</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="display:grid;grid-template-columns:140px 1fr;gap:16px;padding:12px;background:var(--surface);border-radius:8px;align-items:start">
+            <div style="font-size:11px;font-weight:700;color:var(--navy)">Onboarding</div>
+            <div style="font-size:13px;color:var(--body);font-style:italic">"Tu casillero está listo. Ahora puedes comprar donde quieras."</div>
+          </div>
+          <div style="display:grid;grid-template-columns:140px 1fr;gap:16px;padding:12px;background:var(--surface);border-radius:8px;align-items:start">
+            <div style="font-size:11px;font-weight:700;color:var(--navy)">Tracking</div>
+            <div style="font-size:13px;color:var(--body);font-style:italic">"Tu paquete llegó a bodega hoy a las 9:14 am."</div>
+          </div>
+          <div style="display:grid;grid-template-columns:140px 1fr;gap:16px;padding:12px;background:var(--surface);border-radius:8px;align-items:start">
+            <div style="font-size:11px;font-weight:700;color:var(--navy)">Error</div>
+            <div style="font-size:13px;color:var(--body);font-style:italic">"No pudimos procesar el pago. Revisa los datos de tu tarjeta."</div>
+          </div>
+          <div style="display:grid;grid-template-columns:140px 1fr;gap:16px;padding:12px;background:var(--surface);border-radius:8px;align-items:start">
+            <div style="font-size:11px;font-weight:700;color:var(--navy)">Estado vacío</div>
+            <div style="font-size:13px;color:var(--body);font-style:italic">"Aún no tienes paquetes. Empieza agregando uno."</div>
+          </div>
+          <div style="display:grid;grid-template-columns:140px 1fr;gap:16px;padding:12px;background:var(--surface);border-radius:8px;align-items:start">
+            <div style="font-size:11px;font-weight:700;color:var(--navy)">Gamificación</div>
+            <div style="font-size:13px;color:var(--body);font-style:italic">"Estás a 322 puntos de subir de nivel."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════
+         DO'S & DON'TS
+    ════════════════════════════════ -->
+    <div id="sec-dodont" class="section">
+      <div class="page-header">
+        <div class="page-eyebrow">Referencia rápida</div>
+        <h1 class="page-title">Do's &amp; Don'ts</h1>
+        <p class="page-desc">Las reglas más importantes para cualquier pieza de ZenderBox.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Visual y color</div>
+        <div class="do-dont-grid">
+          <div class="do-card">
+            <div class="do-header">✓ Hacer</div>
+            <div class="do-item">Fondo blanco o neutro claro como base dominante</div>
+            <div class="do-item">Gradiente en botones primarios, heroes y CTAs finales</div>
+            <div class="do-item">Texto principal en #333333 o #004B72</div>
+            <div class="do-item">Plus Jakarta Sans en app y dashboard</div>
+            <div class="do-item">Exo para titulares y botones de la web pública</div>
+            <div class="do-item">Logo color sobre fondos claros; blanco sobre oscuros</div>
+            <div class="do-item">Radius 10px para cards de app, 24px para web</div>
+            <div class="do-item">Stroke 1.8px en todos los iconos</div>
+          </div>
+          <div class="dont-card">
+            <div class="dont-header">✗ Evitar</div>
+            <div class="dont-item">Gradiente como fondo de secciones de contenido largo</div>
+            <div class="dont-item">Recolorear o distorsionar el logo</div>
+            <div class="dont-item">Usar Exo en la app o el dashboard</div>
+            <div class="dont-item">Mezclar radios de app con los de web (8px vs 900px)</div>
+            <div class="dont-item">Sombras pesadas en cards (no hay sombra por convención)</div>
+            <div class="dont-item">Gradiente como borde o como sombra</div>
+            <div class="dont-item">Más de 2 colores de marca en el mismo elemento</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Fotografía</div>
+        <div class="do-dont-grid">
+          <div class="do-card">
+            <div class="do-header">✓ Fotografía correcta</div>
+            <div class="do-item">Luz natural, amplia — sin flash frontal</div>
+            <div class="do-item">Personas latinoamericanas, diversas, edad 18–45</div>
+            <div class="do-item">Expresiones reales, no poses de catálogo</div>
+            <div class="do-item">Espacio de trabajo real, no estudio aséptico</div>
+            <div class="do-item">Mix de close-up (manos/producto) + plano medio</div>
+          </div>
+          <div class="dont-card">
+            <div class="dont-header">✗ Fotografía incorrecta</div>
+            <div class="dont-item">Aviones, barcos, camiones como metáfora de envío</div>
+            <div class="dont-item">Cajas de cartón sin contexto humano</div>
+            <div class="dont-item">Personas posando con paquetes mirando a cámara</div>
+            <div class="dont-item">Saturación artificial de colores</div>
+            <div class="dont-item">Solo hombres o solo mujeres en piezas principales</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Copy y voz</div>
+        <div class="do-dont-grid">
+          <div class="do-card">
+            <div class="do-header">✓ Copy correcto</div>
+            <div class="do-item">"Tu paquete llegó a bodega." — claro, directo</div>
+            <div class="do-item">"Algo no funcionó. Intenta de nuevo." — honesto</div>
+            <div class="do-item">"Abre tu casillero gratis" — tuteo, acción directa</div>
+            <div class="do-item">1.678 puntos (punto para miles)</div>
+            <div class="do-item">$349.00 USD (símbolo + espacio + código)</div>
+          </div>
+          <div class="dont-card">
+            <div class="dont-header">✗ Copy incorrecto</div>
+            <div class="dont-item">"¡Tu paquete ya está aquí!!! 🎉" — exagerado</div>
+            <div class="dont-item">"Su pedido ha sido procesado." — ustedeo</div>
+            <div class="dont-item">"Package received" — inglés en UI de usuario</div>
+            <div class="dont-item">"Ups! Algo salió mal 😅" — infantil</div>
+            <div class="dont-item">1,678 puntos (coma como separador de miles)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="background:linear-gradient(135deg,#CCD32A 0%,#029ECB 100%);border:none">
+        <div style="text-align:center;padding:24px 0">
+          <div style="font-family:'Exo',sans-serif;font-size:28px;font-weight:800;color:white;margin-bottom:8px">White First.</div>
+          <div style="font-size:14px;color:rgba(255,255,255,.85);max-width:480px;margin:0 auto;line-height:1.6">El gradiente tiene impacto porque se usa poco. Úsalo cuando quieras que algo diga "esto es ZenderBox".</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</main>
+
+<script>
+const TITLES = {
+  identidad: 'Identidad de marca',
+  colores: 'Colores',
+  tipografia: 'Tipografía',
+  logo: 'Logo y símbolo',
+  botones: 'Botones y CTAs',
+  badges: 'Badges y estados',
+  iconografia: 'Iconografía',
+  espaciado: 'Espaciado y layout',
+  fotografia: 'Fotografía e ilustración',
+  voz: 'Voz y tono',
+  dodont: "Do's & Don'ts",
+};
+
+function show(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => {
+    if (n.getAttribute('onclick') === "show('" + id + "')") n.classList.add('active');
+  });
+  document.getElementById('topbar-title').textContent = TITLES[id] || id;
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+</script>
+</body>
+</html>
