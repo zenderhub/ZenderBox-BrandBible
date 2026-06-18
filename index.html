@@ -41,7 +41,7 @@ body {
 .sidebar {
   width: var(--sidebar-w);
   min-height: 100vh;
-  background: var(--navy);
+  background: linear-gradient(160deg, #029ECB 0%, #7BB82A 100%);
   position: fixed;
   top: 0; left: 0; bottom: 0;
   display: flex;
@@ -51,44 +51,44 @@ body {
 }
 .sidebar-logo {
   padding: 28px 24px 24px;
-  border-bottom: 1px solid rgba(255,255,255,.1);
+  border-bottom: 1px solid rgba(255,255,255,.2);
   display: flex; align-items: center; gap: 12px;
 }
 .sidebar-logo-badge {
   font-family: 'Exo', sans-serif;
   font-size: 9px; font-weight: 800; letter-spacing: .12em;
-  text-transform: uppercase; color: var(--navy);
-  background: var(--lime);
+  text-transform: uppercase; color: white;
+  background: rgba(0,75,114,.45);
   padding: 3px 8px; border-radius: 99px;
   margin-top: 2px; white-space: nowrap;
 }
 .sidebar-nav { padding: 16px 0; flex: 1; }
 .nav-section-title {
-  font-size: 9px; font-weight: 700; letter-spacing: .12em;
-  text-transform: uppercase; color: rgba(255,255,255,.3);
+  font-size: 9px; font-weight: 800; letter-spacing: .12em;
+  text-transform: uppercase; color: rgba(0,40,70,.55);
   padding: 16px 24px 8px;
 }
 .nav-item {
   display: flex; align-items: center; gap: 10px;
   padding: 9px 24px; cursor: pointer;
-  font-size: 13px; font-weight: 500;
-  color: rgba(255,255,255,.6);
+  font-size: 13px; font-weight: 600;
+  color: rgba(0,40,70,.8);
   transition: color .15s, background .15s;
   border-left: 2px solid transparent;
   text-decoration: none;
 }
-.nav-item:hover { color: rgba(255,255,255,.9); background: rgba(255,255,255,.05); }
+.nav-item:hover { color: var(--navy); background: rgba(255,255,255,.25); }
 .nav-item.active {
-  color: white; font-weight: 700;
-  background: rgba(255,255,255,.08);
-  border-left-color: var(--lime);
+  color: var(--navy); font-weight: 700;
+  background: rgba(255,255,255,.35);
+  border-left-color: var(--navy);
 }
-.nav-item svg { width: 15px; height: 15px; opacity: .7; flex-shrink: 0; }
+.nav-item svg { width: 15px; height: 15px; opacity: .65; flex-shrink: 0; }
 .nav-item.active svg { opacity: 1; }
 .sidebar-footer {
   padding: 20px 24px;
-  border-top: 1px solid rgba(255,255,255,.1);
-  font-size: 11px; color: rgba(255,255,255,.3);
+  border-top: 1px solid rgba(0,40,70,.15);
+  font-size: 11px; color: rgba(0,40,70,.55);
   line-height: 1.5;
 }
 
@@ -300,9 +300,8 @@ body {
 
 /* ── ISO ILLO ── */
 .iso-wrap { display: flex; justify-content: center; align-items: center; height: 160px; background: #EFF9FC; border-radius: 12px; overflow: hidden; }
-.iso-wrap svg { display: block; }
-@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
-.iso-anim { animation: float 4s ease-in-out infinite; }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+.iso-anim { animation: float 4s ease-in-out infinite; display: inline-block; }
 
 /* ── SPACING VISUAL ── */
 .spacing-row { display: flex; align-items: center; gap: 16px; margin-bottom: 10px; }
@@ -722,23 +721,98 @@ body {
       <div class="page-header">
         <div class="page-eyebrow">Identidad</div>
         <h1 class="page-title">Logo y símbolo</h1>
-        <p class="page-desc">El wordmark combina "Zender" en cyan y "Box" en lime. El símbolo son dos piezas que forman Z/B usando el gradiente.</p>
+        <p class="page-desc">"Zender" en cyan · "Box" en lime. El símbolo forma Z+B con dos piezas en gradiente. Tres variantes de uso según el fondo.</p>
       </div>
 
-      <div class="grid-2">
-        <div class="card">
-          <div class="card-title">Logo color — fondos claros</div>
-          <div style="background:white;border-radius:10px;padding:32px;display:flex;align-items:center;justify-content:center;border:1px solid var(--divider)">
-            <svg width="200" height="48" viewBox="0 0 283 68" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M83.859 50.255V45.328L97.002 25.126H83.859V19.621H104.46V24.506L91.317 44.747H104.46V50.251H83.859Z" fill="#029ECB"/><path d="M116.987 50.462C114.541 50.462 112.591 50.139 111.135 49.489C109.678 48.84 108.629 47.69 107.982 46.033C107.335 44.377 107.014 42.087 107.014 39.16C107.014 36.234 107.314 33.819 107.922 32.167C108.526 30.51 109.541 29.352 110.972 28.689C112.399 28.026 114.335 27.695 116.781 27.695C118.979 27.695 120.735 27.914 122.055 28.358C123.374 28.801 124.325 29.571 124.916 30.678C125.508 31.784 125.803 33.342 125.803 35.356C125.803 36.845 125.508 38.024 124.916 38.893C124.325 39.763 123.494 40.383 122.423 40.757C121.352 41.131 120.088 41.317 118.632 41.317H113.071C113.127 42.448 113.298 43.352 113.585 44.028C113.872 44.704 114.408 45.186 115.192 45.478C115.976 45.767 117.107 45.913 118.593 45.913H125.062V49.515C123.991 49.735 122.817 49.95 121.541 50.157C120.264 50.363 118.743 50.466 116.987 50.466Z" fill="#029ECB"/><path d="M215.09 50.255V19.625H227.081C230.101 19.625 232.307 20.323 233.695 21.717C235.083 23.111 235.777 25.091 235.777 27.656C235.777 28.87 235.606 29.942 235.263 30.863C234.92 31.788 234.432 32.545 233.802 33.139C233.168 33.733 232.414 34.142 231.536 34.362C232.196 34.525 232.834 34.792 233.451 35.149C234.068 35.506 234.633 35.993 235.139 36.6C235.649 37.206 236.047 37.947 236.334 38.816C236.621 39.685 236.767 40.684 236.767 41.816C236.767 43.886 236.415 45.543 235.717 46.782C235.019 48.026 233.986 48.913 232.628 49.451C231.27 49.989 229.6 50.26 227.62 50.26H215.094Z" fill="#CCD32A"/><path d="M67.785 0H22.844C10.432 0 0.373 10.003 0.373 22.346H45.046V44.963L67.789 22.346V0Z" fill="url(#lg0)"/><path d="M23.116 22.346L0.373 44.963V67.309H45.314C57.726 67.309 67.785 57.306 67.785 44.963H23.116V22.346Z" fill="url(#lg1)"/><defs><linearGradient id="lg0" x1="55.87" y1="20.02" x2="20.80" y2="43.50" gradientUnits="userSpaceOnUse"><stop stop-color="#CCD32A"/><stop offset="0.845" stop-color="#029ECB"/></linearGradient><linearGradient id="lg1" x1="55.86" y1="42.37" x2="20.80" y2="65.84" gradientUnits="userSpaceOnUse"><stop stop-color="#CCD32A"/><stop offset="0.845" stop-color="#029ECB"/></linearGradient></defs></svg>
+      <!-- USO SOBRE FONDOS — 3 columnas -->
+      <div class="card">
+        <div class="card-title">Uso según el fondo</div>
+        <div class="grid-3" style="gap:0;border-radius:12px;overflow:hidden;border:1px solid var(--divider)">
+
+          <!-- Fondo blanco -->
+          <div style="background:#FFFFFF;padding:40px 32px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;border-right:1px solid var(--divider)">
+            <img src="logo-hor-color.svg" alt="ZenderBox logo color" style="width:180px;height:auto">
+            <div style="text-align:center">
+              <div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:4px">Fondo blanco / claro</div>
+              <div style="font-size:10px;color:var(--mid)">Logo color siempre</div>
+            </div>
           </div>
-          <div style="font-size:12px;color:var(--mid);margin-top:10px">"Zender" en cyan <code>#029ECB</code> · "Box" en lime <code>#CCD32A</code></div>
+
+          <!-- Fondo oscuro -->
+          <div style="background:#1E1E1E;padding:40px 32px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;border-right:1px solid rgba(255,255,255,.08)">
+            <img src="logo-hor-blanco.svg" alt="ZenderBox logo blanco" style="width:180px;height:auto">
+            <div style="text-align:center">
+              <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.7);margin-bottom:4px">Fondo oscuro / negro</div>
+              <div style="font-size:10px;color:rgba(255,255,255,.4)">Logo blanco</div>
+            </div>
+          </div>
+
+          <!-- Fondo gradiente -->
+          <div style="background:linear-gradient(135deg,#0098C5 0%,#A2C037 100%);padding:40px 32px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px">
+            <img src="logo-hor-blanco.svg" alt="ZenderBox logo blanco sobre gradiente" style="width:180px;height:auto">
+            <div style="text-align:center">
+              <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.85);margin-bottom:4px">Fondo gradiente / cyan</div>
+              <div style="font-size:10px;color:rgba(255,255,255,.6)">Logo blanco siempre</div>
+            </div>
+          </div>
+
         </div>
-        <div class="card">
-          <div class="card-title">Logo blanco — fondos de color</div>
-          <div style="background:linear-gradient(135deg,#CCD32A,#029ECB);border-radius:10px;padding:32px;display:flex;align-items:center;justify-content:center">
-            <svg width="200" height="48" viewBox="0 0 283 68" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M83.859 50.255V45.328L97.002 25.126H83.859V19.621H104.46V24.506L91.317 44.747H104.46V50.251H83.859Z" fill="white"/><path d="M215.09 50.255V19.625H227.081C230.101 19.625 232.307 20.323 233.695 21.717C235.083 23.111 235.777 25.091 235.777 27.656C235.777 28.87 235.606 29.942 235.263 30.863C234.92 31.788 234.432 32.545 233.802 33.139C233.168 33.733 232.414 34.142 231.536 34.362C232.196 34.525 232.834 34.792 233.451 35.149C234.068 35.506 234.633 35.993 235.139 36.6C235.649 37.206 236.047 37.947 236.334 38.816C236.621 39.685 236.767 40.684 236.767 41.816C236.767 43.886 236.415 45.543 235.717 46.782C235.019 48.026 233.986 48.913 232.628 49.451C231.27 49.989 229.6 50.26 227.62 50.26H215.094Z" fill="white"/><path d="M67.785 0H22.844C10.432 0 0.373 10.003 0.373 22.346H45.046V44.963L67.789 22.346V0Z" fill="white"/><path d="M23.116 22.346L0.373 44.963V67.309H45.314C57.726 67.309 67.785 57.306 67.785 44.963H23.116V22.346Z" fill="white"/></svg>
+      </div>
+
+      <!-- SÍMBOLO / FAVICON -->
+      <div class="card">
+        <div class="card-title">Símbolo — favicon y uso standalone</div>
+        <div style="display:flex;gap:16px;align-items:stretch;flex-wrap:wrap;margin-bottom:20px">
+          <div style="background:#FFFFFF;border:1px solid var(--divider);border-radius:12px;padding:28px 32px;display:flex;flex-direction:column;align-items:center;gap:12px;flex:1;min-width:140px">
+            <img src="logo-fav-color.svg" alt="Favicon color" style="width:64px;height:64px">
+            <div style="font-size:11px;font-weight:700;color:var(--navy)">Color</div>
+            <div style="font-size:10px;color:var(--mid);text-align:center">Sobre fondo blanco o claro</div>
           </div>
-          <div style="font-size:12px;color:var(--mid);margin-top:10px">Usar sobre cyan, gradiente o fondos oscuros</div>
+          <div style="background:#1E1E1E;border-radius:12px;padding:28px 32px;display:flex;flex-direction:column;align-items:center;gap:12px;flex:1;min-width:140px">
+            <img src="logo-fav-blanco.svg" alt="Favicon blanco" style="width:64px;height:64px">
+            <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.7)">Blanco</div>
+            <div style="font-size:10px;color:rgba(255,255,255,.4);text-align:center">Sobre oscuro o gradiente</div>
+          </div>
+          <div style="background:linear-gradient(135deg,#0098C5,#A2C037);border-radius:12px;padding:28px 32px;display:flex;flex-direction:column;align-items:center;gap:12px;flex:1;min-width:140px">
+            <img src="logo-fav-blanco.svg" alt="Favicon blanco sobre gradiente" style="width:64px;height:64px">
+            <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.85)">Sobre gradiente</div>
+            <div style="font-size:10px;color:rgba(255,255,255,.6);text-align:center">Logo blanco siempre</div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--divider);border-radius:12px;padding:20px 24px;flex:2;min-width:200px;display:flex;flex-direction:column;justify-content:center;gap:8px">
+            <div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:4px">Cuándo usar el símbolo solo</div>
+            <div style="font-size:12px;color:var(--soft);line-height:1.6">Favicon de browser · Ícono de app · Foto de perfil · Sticker · Sello pequeño donde el wordmark no cabe. Nunca como reemplazo del logo completo en piezas de comunicación.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DESCARGAS -->
+      <div class="card">
+        <div class="card-title">Archivos para descargar</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+          <a href="logo-hor-color.svg" download style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px 12px;background:var(--surface);border:1px solid var(--divider);border-radius:10px;text-decoration:none;transition:border-color .15s" onmouseover="this.style.borderColor='var(--cyan)'" onmouseout="this.style.borderColor='var(--divider)'">
+            <img src="logo-hor-color.svg" style="width:100px;height:auto">
+            <div style="font-size:11px;font-weight:700;color:var(--navy)">Horizontal color</div>
+            <div style="font-size:10px;color:var(--mid)">.svg · Fondos claros</div>
+            <div style="font-size:10px;font-weight:700;color:var(--cyan)">↓ Descargar</div>
+          </a>
+          <a href="logo-hor-blanco.svg" download style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px 12px;background:#1E1E1E;border:1px solid rgba(255,255,255,.1);border-radius:10px;text-decoration:none;transition:border-color .15s" onmouseover="this.style.borderColor='rgba(255,255,255,.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,.1)'">
+            <img src="logo-hor-blanco.svg" style="width:100px;height:auto">
+            <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.7)">Horizontal blanco</div>
+            <div style="font-size:10px;color:rgba(255,255,255,.4)">.svg · Fondos oscuros</div>
+            <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.5)">↓ Descargar</div>
+          </a>
+          <a href="logo-fav-color.svg" download style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px 12px;background:var(--surface);border:1px solid var(--divider);border-radius:10px;text-decoration:none;transition:border-color .15s" onmouseover="this.style.borderColor='var(--cyan)'" onmouseout="this.style.borderColor='var(--divider)'">
+            <img src="logo-fav-color.svg" style="width:48px;height:48px">
+            <div style="font-size:11px;font-weight:700;color:var(--navy)">Favicon color</div>
+            <div style="font-size:10px;color:var(--mid)">.svg · Fondos claros</div>
+            <div style="font-size:10px;font-weight:700;color:var(--cyan)">↓ Descargar</div>
+          </a>
+          <a href="logo-fav-blanco.svg" download style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px 12px;background:#1E1E1E;border:1px solid rgba(255,255,255,.1);border-radius:10px;text-decoration:none;transition:border-color .15s" onmouseover="this.style.borderColor='rgba(255,255,255,.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,.1)'">
+            <img src="logo-fav-blanco.svg" style="width:48px;height:48px">
+            <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.7)">Favicon blanco</div>
+            <div style="font-size:10px;color:rgba(255,255,255,.4)">.svg · Fondos oscuros</div>
+            <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.5)">↓ Descargar</div>
+          </a>
         </div>
       </div>
 
@@ -748,15 +822,15 @@ body {
           <div class="do-card">
             <div class="do-header">✓ Correcto</div>
             <div class="do-item">Logo color sobre fondos blancos y claros</div>
-            <div class="do-item">Logo blanco sobre gradiente y fondos cyan</div>
-            <div class="do-item">Espacio mínimo: 16px alrededor del símbolo</div>
+            <div class="do-item">Logo blanco sobre gradiente, oscuro y fondos cyan</div>
+            <div class="do-item">Espacio mínimo: equivalente a la altura de la Z alrededor</div>
             <div class="do-item">Proporciones originales del SVG siempre</div>
           </div>
           <div class="dont-card">
             <div class="dont-header">✗ Prohibido</div>
             <div class="dont-item">Recolorear el wordmark o el símbolo</div>
-            <div class="dont-item">Estirar o comprimir el logo</div>
-            <div class="dont-item">Usar sobre fondos que reducen legibilidad</div>
+            <div class="dont-item">Estirar, rotar o comprimir el logo</div>
+            <div class="dont-item">Logo color sobre fondo gradiente — se pierde</div>
             <div class="dont-item">Separar el símbolo del wordmark (salvo favicon)</div>
           </div>
         </div>
@@ -1080,21 +1154,10 @@ body {
           </div>
           <div>
             <div style="height:280px;border-radius:16px;overflow:hidden;position:relative;background:linear-gradient(135deg,#CCD32A,#029ECB);display:flex;align-items:center;justify-content:center">
-              <div>
-                <div style="text-align:center;color:white">
-                  <div class="iso-wrap" style="background:transparent;height:auto;border-radius:0">
-                    <svg width="200" height="150" viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg">
-                      <g class="iso-anim">
-                        <ellipse cx="140" cy="162" rx="44" ry="9" fill="rgba(0,0,0,.15)"/>
-                        <polygon points="140,30 196,62 140,94 84,62" fill="#CCD32A"/>
-                        <polygon points="196,62 196,122 140,154 140,94" fill="#029ECB"/>
-                        <polygon points="140,94 140,154 84,122 84,62" fill="#007B9F"/>
-                      </g>
-                    </svg>
-                  </div>
-                  <div style="font-family:'Exo',sans-serif;font-size:14px;font-weight:700;margin-top:4px">Ilustración isométrica</div>
-                  <div style="font-size:11px;opacity:.8;margin-top:4px">Lime / Cyan / Dark cyan</div>
-                </div>
+              <div style="text-align:center">
+                <span class="iso-anim" style="font-size:100px;line-height:1;display:inline-block;filter:drop-shadow(0 16px 24px rgba(0,0,0,.2))">📦</span>
+                <div style="font-family:'Exo',sans-serif;font-size:14px;font-weight:700;color:white;margin-top:16px">Ilustración isométrica</div>
+                <div style="font-size:11px;color:rgba(255,255,255,.8);margin-top:4px">3D · natural · emoji-first</div>
               </div>
             </div>
             <div style="font-size:11px;color:var(--mid);margin-top:8px;line-height:1.5">Para pasos, onboarding y estados vacíos</div>
