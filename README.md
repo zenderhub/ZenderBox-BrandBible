@@ -2,6 +2,11 @@
 
 Guía de identidad visual completa para ZenderBox — servicio de casillero y package-forwarding para latinoamericanos que compran en EE.UU.
 
+## Ver el brand bible
+
+- **En vivo:** https://zenderhub.github.io/ZenderBox-BrandBible/
+- **Local:** abre [`index.html`](index.html) en cualquier navegador. No requiere build ni dependencias.
+
 ## Contenido
 
 | Archivo | Descripción |
