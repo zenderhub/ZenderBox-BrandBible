@@ -1751,6 +1751,8 @@ body {
 .chk-clr-badge{font-size:9px;font-weight:700;padding:2px 8px;border-radius:99px;flex-shrink:0}
 .chk-clr-badge.ok{background:#E8F8EE;color:#008C31}.chk-clr-badge.off{background:#FDF4F5;color:#CC1111}
 .chk-right{flex:1;overflow-y:auto;padding:24px 28px}
+.chk-summary-btn{display:block;width:100%;margin-top:16px;padding:11px 16px;border-radius:10px;border:1.5px solid #029ECB;background:#F0FAFD;color:#029ECB;font-size:12px;font-weight:700;cursor:pointer;text-align:center;transition:background .15s,color .15s}
+.chk-summary-btn:hover{background:#029ECB;color:#fff}
 .chk-voice-sec{margin-top:20px;padding-top:20px;border-top:1px solid var(--divider)}
 .chk-voice-title{font-size:9px;font-weight:800;letter-spacing:.12em;color:var(--mid);text-transform:uppercase;margin-bottom:10px}
 .chk-card.pending{background:#F6F6F6}
@@ -1872,9 +1874,10 @@ function closestBrand(r,g,b) {
 
 function runAnalysis(data, width, height) {
   let total=0, cyanPx=0, limePx=0, lightPx=0, darkPx=0, cyanDarkPx=0;
-  let midDarkPx=0;
+  let midDarkPx=0, bottomBrightPx=0, bottomDarkPx=0;
   let cyanSumX=0,cyanSumY=0, limeSumX=0,limeSumY=0;
   const allBrightness=[];
+  const bottomStart=Math.floor(height*0.60);
 
   for(let i=0;i<data.length;i+=4){
     const r=data[i], g=data[i+1], b=data[i+2];
@@ -1894,6 +1897,12 @@ function runAnalysis(data, width, height) {
 
     // Píxeles en rango medio-oscuro: señal de foto con overlay oscuro
     if(lum >= 25 && lum <= 150) midDarkPx++;
+
+    // Logo blanco: píxeles brillantes en la zona inferior de la imagen (logo blanco sobre foto oscura)
+    if(py >= bottomStart){
+      if(lum > 185) bottomBrightPx++;
+      else if(lum < 70) bottomDarkPx++;
+    }
   }
 
   // Logo: centroid distance between cyan and lime pixels
@@ -2003,6 +2012,10 @@ function runAnalysis(data, width, height) {
     darkPx, cyanDarkPx,
     cyanDarkRatio: darkPx>10 ? cyanDarkPx/darkPx : null,
     gradientRatio: gradRows/ROWS,
+    hasWhiteLogo: (()=>{
+      const bottomTotal=(height-bottomStart)*width;
+      return bottomBrightPx>40 && (bottomBrightPx/bottomTotal)>0.008 && (bottomDarkPx/bottomTotal)>0.25;
+    })(),
     edgeStddev,
     logoCentroidRatio,
     lowContrastRatio,
@@ -2077,12 +2090,12 @@ function buildChecks(a) {
     {
       id:'logo', emoji:'🔷', name:'Logo de ZenderBox: cyan y lime co-localizados',
       pts:10, photoOnly:false, approx:true,
-      pass: a.cyanPx>8 && a.limePx>8 && a.logoCentroidRatio < 0.40,
-      detail: (a.cyanPx<=8 || a.limePx<=8)
-        ? 'No se detectaron ambos colores del logo: puede faltar el logo o usarse la variante blanca'
-        : a.logoCentroidRatio < 0.40
-          ? `Cyan y lime co-localizados (distancia ${(a.logoCentroidRatio*100).toFixed(0)}% del diagonal): señal de logo presente`
-          : `Cyan y lime en zonas separadas de la imagen (${(a.logoCentroidRatio*100).toFixed(0)}% del diagonal): puede faltar el logo`,
+      pass: (a.cyanPx>8 && a.limePx>8 && a.logoCentroidRatio < 0.40) || a.hasWhiteLogo,
+      detail: ((a.cyanPx>8 && a.limePx>8 && a.logoCentroidRatio < 0.40))
+        ? `Cyan y lime co-localizados (distancia ${(a.logoCentroidRatio*100).toFixed(0)}% del diagonal): logo color detectado`
+        : a.hasWhiteLogo
+          ? 'Logo blanco detectado: zona inferior con elementos claros sobre fondo oscuro'
+          : 'No se detectó logo: puede faltar o estar en una variante no reconocible (muy pequeño, muy recortado)',
     },
     {
       id:'contrast', emoji:'👁️', name:'Sin contenido cortado ni elementos encimados',
@@ -2129,8 +2142,9 @@ function buildVoiceChecks(rawText) {
   const engFound = engWords.filter(w => t.includes(w));
   const hasNoEnglish = engFound.length === 0;
 
-  // Sin em-dash ni en-dash
-  const hasNoEmDash = !rawText.includes('—') && !rawText.includes('–');
+  // Sin em-dash ni en-dash en contexto de prosa (no entre dígitos como "95–12" o "No. 95-12")
+  const dashMatches = rawText.match(/(?<!\d)[—–](?!\d)/g) || [];
+  const hasNoEmDash = dashMatches.length === 0;
 
   // Sin tono corporativo formal: "estimado/a", "le rogamos", "por favor tenga en cuenta", "a continuación"
   const formalMatches = rawText.match(/\bestimad[oa]\b|\ble rogamos\b|\ba continuaci[oó]n\b|\bpor favor tenga\b/gi) || [];
@@ -2250,6 +2264,46 @@ function renderResults(checks, hasPhoto) {
   // Footer
   const passed=applicable.filter(c=>c.pass).length;
   document.getElementById('chkFtNote').innerHTML=`<b>${passed}/${applicable.length}</b> criterios cumplidos · Score: <b>${pct}%</b>`;
+
+  // Guardar checks en variable global para el resumen
+  window._lastChecks = {checks, hasPhoto, pct};
+  renderSummaryBtn();
+}
+
+let _lastVoiceChecks = null;
+
+function renderSummaryBtn() {
+  const existing = document.getElementById('chkSummaryBtn');
+  if(existing) existing.remove();
+  if(!window._lastChecks) return;
+  const {checks, hasPhoto, pct} = window._lastChecks;
+  const applicable = checks.filter(c => (!c.photoOnly || hasPhoto) && (!c.graphicOnly || !hasPhoto));
+  const failing = applicable.filter(c => !c.pass);
+  if(failing.length === 0 && (!_lastVoiceChecks || _lastVoiceChecks.every(c=>c.pass))) return;
+  const btn = document.createElement('button');
+  btn.id = 'chkSummaryBtn';
+  btn.className = 'chk-summary-btn';
+  btn.textContent = 'Copiar resumen de problemas para Claude';
+  btn.onclick = () => {
+    const lines = ['Brand Checker ZenderBox — resumen de correcciones\n'];
+    if(failing.length > 0){
+      lines.push('VISUAL:');
+      failing.forEach(c => lines.push(`• ${c.name}: ${c.detail}`));
+    }
+    if(_lastVoiceChecks){
+      const vFail = _lastVoiceChecks.filter(c=>!c.pass);
+      if(vFail.length > 0){
+        lines.push('\nVOZ Y TONO:');
+        vFail.forEach(c => lines.push(`• ${c.name}: ${c.detail}`));
+      }
+    }
+    lines.push(`\nScore actual: ${pct}%. Corrige los puntos anteriores y vuelve a pasar el Brand Checker.`);
+    navigator.clipboard.writeText(lines.join('\n')).then(()=>{
+      btn.textContent = '¡Copiado!';
+      setTimeout(()=>{ btn.textContent='Copiar resumen de problemas para Claude'; },2200);
+    });
+  };
+  document.getElementById('chkResults').after(btn);
 }
 
 function analyzeImg(img) {
@@ -2299,6 +2353,7 @@ function analyzeImg(img) {
     Tesseract.recognize(img, 'spa+eng', { logger: () => {} })
   ).then(result => {
     const text = result.data.text || '';
+    _lastVoiceChecks = null;
     if (text.trim().length < 5) {
       // Texto muy corto: OCR no extrajo nada útil
       const sec = document.getElementById('chkVoiceSec');
@@ -2312,7 +2367,10 @@ function analyzeImg(img) {
         <div class="chk-card-badge na">SIN TEXTO</div>
       </div>`;
     } else {
-      renderVoiceCards(buildVoiceChecks(text), false);
+      const vc = buildVoiceChecks(text);
+      _lastVoiceChecks = vc;
+      renderVoiceCards(vc, false);
+      renderSummaryBtn();
     }
   }).catch(() => {
     document.getElementById('chkVoice').innerHTML = `<div style="font-size:11px;color:var(--soft);padding:10px 0">No se pudo cargar el lector de texto. Verifica tu conexión.</div>`;
@@ -2354,6 +2412,8 @@ function resetChecker() {
   document.getElementById('chkFtNote').textContent='Sube una imagen para comenzar el diagnóstico automático';
   document.getElementById('chkVoiceSec').style.display='none';
   document.getElementById('chkVoice').innerHTML='';
+  window._lastChecks = null; _lastVoiceChecks = null;
+  const sb = document.getElementById('chkSummaryBtn'); if(sb) sb.remove();
 }
 </script>
 
