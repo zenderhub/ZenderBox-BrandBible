@@ -1871,7 +1871,8 @@ function closestBrand(r,g,b) {
 }
 
 function runAnalysis(data, width, height) {
-  let total=0, cyanPx=0, limePx=0, lightPx=0, darkPx=0, cyanDarkPx=0, offBrandPx=0;
+  let total=0, cyanPx=0, limePx=0, lightPx=0, darkPx=0, cyanDarkPx=0;
+  let midDarkPx=0;
   let cyanSumX=0,cyanSumY=0, limeSumX=0,limeSumY=0;
   const allBrightness=[];
 
@@ -1891,15 +1892,8 @@ function runAnalysis(data, width, height) {
       if(b > r+4 && g >= r-6) cyanDarkPx++;
     }
 
-    const maxC=Math.max(r,g,b), minC=Math.min(r,g,b);
-    const sat = maxC>0 ? (maxC-minC)/maxC : 0;
-    if(sat>0.34 && maxC>55) {
-      const minD = Math.min(
-        cDist(r,g,b,2,158,203), cDist(r,g,b,204,211,42),
-        cDist(r,g,b,0,75,114),  cDist(r,g,b,0,123,159)
-      );
-      if(minD>68) offBrandPx++;
-    }
+    // Píxeles en rango medio-oscuro: señal de foto con overlay oscuro
+    if(lum >= 25 && lum <= 150) midDarkPx++;
   }
 
   // Logo: centroid distance between cyan and lime pixels
@@ -1998,7 +1992,8 @@ function runAnalysis(data, width, height) {
   // Photo detection: overall brightness stddev
   const bMean=allBrightness.reduce((a,b)=>a+b,0)/allBrightness.length;
   const photoScore=Math.sqrt(allBrightness.reduce((s,v)=>s+(v-bMean)**2,0)/allBrightness.length);
-  const hasPhoto = photoScore > 50;
+  // Foto con overlay oscuro: midDarkPx cubre >50% de la imagen aunque el stddev sea bajo
+  const hasPhoto = photoScore > 50 || (midDarkPx/total) > 0.50;
 
   return {
     total,
@@ -2007,7 +2002,6 @@ function runAnalysis(data, width, height) {
     lightRatio: lightPx/total,
     darkPx, cyanDarkPx,
     cyanDarkRatio: darkPx>10 ? cyanDarkPx/darkPx : null,
-    offBrandRatio: offBrandPx/total,
     gradientRatio: gradRows/ROWS,
     edgeStddev,
     logoCentroidRatio,
@@ -2038,19 +2032,11 @@ function buildChecks(a) {
     },
     {
       id:'white_first', emoji:'⬜', name:'White First: fondo predominantemente claro',
-      pts:18, photoOnly:false,
+      pts:18, photoOnly:false, graphicOnly:true,
       pass: a.lightRatio > 0.38,
       detail: a.lightRatio > 0.38
         ? `${(a.lightRatio*100).toFixed(0)}% de la imagen es blanco o claro: White First cumplido`
         : `Solo ${(a.lightRatio*100).toFixed(0)}% claro: el fondo no es predominantemente blanco`,
-    },
-    {
-      id:'off_brand', emoji:'🚫', name:'Sin colores off-brand dominantes',
-      pts:15, photoOnly:false,
-      pass: a.offBrandRatio < 0.04,
-      detail: a.offBrandRatio < 0.04
-        ? `Solo ${(a.offBrandRatio*100).toFixed(1)}% de píxeles fuera de la paleta ZenderBox: bien`
-        : `${(a.offBrandRatio*100).toFixed(1)}% de píxeles saturados fuera de la paleta (cyan, lime, navy). Origen probable: emojis de color, gráficos o ilustraciones externas. Si hay fotografía, un valor bajo es normal. Sin foto, revisa íconos, stickers o imágenes que usen colores propios`,
     },
     {
       id:'dark_tint', emoji:'🌑', name:'Oscuros con tinte cyan (no negro puro)',
@@ -2221,7 +2207,7 @@ function openChecker() { document.getElementById('chkOv').classList.add('open');
 function closeChecker() { document.getElementById('chkOv').classList.remove('open'); }
 
 function renderResults(checks, hasPhoto) {
-  const applicable = checks.filter(c => !c.photoOnly || hasPhoto);
+  const applicable = checks.filter(c => (!c.photoOnly || hasPhoto) && (!c.graphicOnly || !hasPhoto));
   const maxPts = applicable.reduce((s,c)=>s+c.pts, 0);
   const earned  = applicable.filter(c=>c.pass).reduce((s,c)=>s+c.pts, 0);
   const pct = maxPts>0 ? Math.round(earned/maxPts*100) : 0;
@@ -2246,7 +2232,7 @@ function renderResults(checks, hasPhoto) {
   const el=document.getElementById('chkResults');
   el.innerHTML='';
   checks.forEach(c => {
-    const isNA = c.photoOnly && !hasPhoto;
+    const isNA = (c.photoOnly && !hasPhoto) || (c.graphicOnly && hasPhoto);
     const state = isNA ? 'na' : c.pass ? 'pass' : 'fail';
     const badgeLabel = isNA ? 'N/A: sin foto' : c.pass ? 'PASA' : 'FALLA';
     const div=document.createElement('div');
@@ -2255,7 +2241,7 @@ function renderResults(checks, hasPhoto) {
     div.innerHTML=`<div class="chk-card-ico">${c.emoji}</div>
       <div class="chk-card-body">
         <div class="chk-card-name">${c.name}${approxNote}</div>
-        <div class="chk-card-detail">${isNA ? 'No se detectó fotografía en la pieza: este criterio no aplica.' : c.detail}</div>
+        <div class="chk-card-detail">${isNA ? (c.graphicOnly ? 'La pieza tiene fotografía: White First no aplica, el fondo oscuro es intencional.' : 'No se detectó fotografía en la pieza: este criterio no aplica.') : c.detail}</div>
       </div>
       <div class="chk-card-badge ${state}">${badgeLabel}</div>`;
     el.appendChild(div);
