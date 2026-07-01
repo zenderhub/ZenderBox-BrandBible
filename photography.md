@@ -106,9 +106,18 @@ El usuario que usa ZenderBox para su negocio.
 
 ## Overlays y tratamiento sobre foto
 
-### Texto sobre foto oscura
+### Texto sobre foto — overlay siempre con tono cyan
+
+El overlay oscuro **nunca es negro puro ni navy**. Siempre usa cyan profundo como base para que la oscuridad tenga identidad de marca:
+
 ```css
-background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%);
+background: linear-gradient(to top,
+  rgba(0,58,85,0.92) 0%,
+  rgba(1,75,105,0.78) 25%,
+  rgba(2,90,125,0.42) 52%,
+  rgba(2,120,160,0.14) 75%,
+  transparent 100%
+);
 ```
 
 ### Glassmorphism sobre foto

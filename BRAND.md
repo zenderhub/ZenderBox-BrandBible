@@ -357,7 +357,16 @@ ZenderBox existe en el espacio entre el deseo y la llegada. Las fotos capturan:
 
 ### Overlays sobre fotos
 
-Para texto encima de foto: `linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%)`
+Para texto encima de foto — el overlay **siempre tira a cyan**, nunca a negro puro ni navy:
+```css
+linear-gradient(to top,
+  rgba(0,58,85,0.92) 0%,
+  rgba(1,75,105,0.78) 25%,
+  rgba(2,90,125,0.42) 52%,
+  rgba(2,120,160,0.14) 75%,
+  transparent 100%
+)
+```
 Para glassmorphism: `background: rgba(255,255,255,0.1); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.2)`
 
 ---
