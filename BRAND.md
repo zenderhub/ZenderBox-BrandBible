@@ -409,7 +409,7 @@ Ver [`voice.md`](voice.md) para guía completa.
 - **Idioma**: Español latinoamericano. Ningún texto de UI en inglés.
 - **Trato**: `tu`, `tus`, `tienes`, `hazle`. Nunca "usted".
 - **Personalidad**: Empoderador · Transparente · Práctico · Cercano y colombiano
-- **Sin emoji** (salvo petición explícita)
+- **Emojis con medida** — no como decoración genérica. Se usan uno a la vez, anclados a una palabra clave, un badge o un elemento de navegación. Nunca dos emojis seguidos, nunca como reemplazo de iconos en UI de producto. En copy: solo si refuerzan un estado o categoría específica (`📦 En bodega`, `✅ Entregado`).
 - **Sin em-dashes** (—)
 
 ### Copy verbatim importante
@@ -460,3 +460,4 @@ Ver [`voice.md`](voice.md) para guía completa.
 - [ ] ¿Las fotos siguen la dirección de luz natural y diversidad latina?
 - [ ] ¿Los iconos son Lucide con stroke 1.8px?
 - [ ] ¿Los radios de cards y botones corresponden al producto (app vs web)?
+- [ ] ¿Los emojis están anclados a una palabra clave o badge (no sueltos, no dos seguidos)?
