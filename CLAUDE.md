@@ -78,6 +78,17 @@ Usa estos slash commands para tareas específicas:
 
 ---
 
+## Descarga automática — siempre
+
+Cuando una pieza quede lista, **descárgala automáticamente** al ordenador del usuario en el formato que se pidió al inicio, sin que tenga que hacer nada:
+
+- **HTML**: guarda en `~/Desktop/` con nombre descriptivo y dispara un `<a download>` al cargar la página.
+- **PNG / JPG**: usa `html2canvas` sobre el artboard para generar el blob y descargarlo con `canvas.toDataURL()`. Si el entorno no permite CDN externo, genera el archivo desde el servidor local e indica la ruta exacta donde quedó guardado.
+- El nombre del archivo debe ser descriptivo: `zenderbox-[tipo]-[breve-descripcion].ext` (ej. `zenderbox-post-venezuela.html`, `zenderbox-story-black-friday.png`).
+- Nunca termines una pieza sin confirmar que el archivo ya está en el ordenador del usuario.
+
+---
+
 ## Notas técnicas para construcción HTML
 
 - Canvas exacto al formato pedido (ej. 1080×1080 px para feed Instagram)

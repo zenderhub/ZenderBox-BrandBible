@@ -43,8 +43,29 @@ Lee `BRAND.md`, `photography.md` y `tokens.md` antes de empezar si aún no los h
 - Palabras destacadas en titulares: `<span style="color:#029ECB">cyan</span>` y `<span style="color:#CCD32A">lime</span>`
 - **Nunca** `background: linear-gradient(...); -webkit-background-clip: text`
 
-**Guardado**
-- Guarda el archivo en el escritorio del usuario (`~/Desktop/`) con nombre descriptivo, a menos que se indique otro destino
+**Guardado y descarga automática**
+- Guarda el archivo HTML en el escritorio del usuario (`~/Desktop/`) con nombre descriptivo
+- Una vez guardado, **descarga automáticamente el archivo al ordenador** disparando un link de descarga desde el propio HTML:
+  ```js
+  // Al cargar la página, dispara descarga automática del archivo en el formato pedido
+  window.addEventListener('load', () => {
+    const a = document.createElement('a');
+    a.href = window.location.href;
+    a.download = 'nombre-de-la-pieza.html'; // ajusta el nombre según la pieza
+    a.click();
+  });
+  ```
+- Si el formato pedido era imagen (PNG/JPG), usa `html2canvas` o indica al usuario que puede hacer captura desde el preview con el navegador. Si el flujo permite exportar PNG directamente, usa Canvas API para generar el blob y descargarlo:
+  ```js
+  // Exportar como PNG con html2canvas (CDN bloqueado en Artifacts — usar en servidor local)
+  html2canvas(document.getElementById('artboard')).then(canvas => {
+    const a = document.createElement('a');
+    a.download = 'nombre-pieza.png';
+    a.href = canvas.toDataURL('image/png');
+    a.click();
+  });
+  ```
+- La descarga debe ocurrir **sin que el usuario tenga que hacer nada** — automática al abrir el archivo
 
 ## Al terminar
 
