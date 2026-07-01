@@ -55,6 +55,17 @@ Versiones disponibles:
 
 ## 4. Colores
 
+### Regla de color en texto destacado
+
+**Las palabras de color nunca van con gradiente.** Cuando se colorea texto de marca, cada palabra recibe un color sólido: una en **cyan `#029ECB`** y la otra en **lime `#CCD32A`**. El gradiente se reserva para elementos gráficos (logo, barras de progreso, botones primary, avatares) — nunca para letras.
+
+```
+✅ <span style="color:#029ECB">siempre</span> <span style="color:#CCD32A">contigo.</span>
+❌ background: linear-gradient(...); -webkit-background-clip: text;
+```
+
+---
+
 ### Colores primarios de marca
 
 | Token | Hex | Uso |
@@ -101,6 +112,8 @@ Versiones disponibles:
 ---
 
 ## 5. Tipografía
+
+> **Regla de color en titulares**: cuando un titular usa dos colores de marca, cada palabra lleva un color sólido — una en cyan `#029ECB`, otra en lime `#CCD32A`. Nunca gradiente en texto.
 
 ### App móvil y Dashboard web
 
@@ -316,6 +329,8 @@ Set custom basado en **Lucide** (stroke icons).
 ## 11. Fotografía
 
 ### Reglas obligatorias
+
+**El overlay oscuro sobre foto siempre tira a cyan.** Nunca negro puro (`#000`), nunca navy (`#004B72`). El color oscuro de marca es cyan profundo — incluso en las sombras, la identidad visual debe ser reconocible. Ver token exacto en la sección Overlays más abajo.
 
 **La fotografía es siempre la primera opción.** Toda pieza de comunicación debe explorar primero una solución con foto real. Solo si el formato no lo permite (icono, ilustración de proceso, estado vacío) se recurre a ilustración.
 
