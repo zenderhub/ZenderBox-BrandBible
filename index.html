@@ -2122,7 +2122,7 @@ function buildChecks(a) {
       pass: a.emojiRatio > 0.003 && a.emojiCandidates >= 2,
       detail: (a.emojiRatio > 0.003 && a.emojiCandidates >= 2)
         ? `${a.emojiCandidates} cluster(s) multi-tono en área plana: señal de emojis presentes`
-        : `No se detectaron emojis en zonas de fondo claro: verificar que la pieza incluya al menos uno anclado a una palabra clave`,
+        : `No se detectaron emojis en zonas de fondo claro. Si la pieza tiene iconos SVG o Lucide, reemplázalos por emojis: son más directos, no dependen de CDN y funcionan en cualquier formato impreso o digital`,
     },
   ];
 }
