@@ -1751,6 +1751,12 @@ body {
 .chk-clr-badge{font-size:9px;font-weight:700;padding:2px 8px;border-radius:99px;flex-shrink:0}
 .chk-clr-badge.ok{background:#E8F8EE;color:#008C31}.chk-clr-badge.off{background:#FDF4F5;color:#CC1111}
 .chk-right{flex:1;overflow-y:auto;padding:24px 28px}
+.chk-voice-sec{margin-top:20px;padding-top:20px;border-top:1px solid var(--divider)}
+.chk-voice-title{font-size:9px;font-weight:800;letter-spacing:.12em;color:var(--mid);text-transform:uppercase;margin-bottom:10px}
+.chk-card.pending{background:#F6F6F6}
+.chk-card-badge.pending{background:#EFEFEF;color:var(--mid)}
+.chk-card-badge.pass{background:#E8F8EE;color:#008C31}
+.chk-card-badge.fail{background:#FDF4F5;color:#CC1111}
 .chk-score-row{display:flex;align-items:center;gap:20px;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--divider)}
 .chk-donut{position:relative;width:90px;height:90px;flex-shrink:0}
 .chk-donut svg{width:100%;height:100%;transform:rotate(-90deg)}
@@ -1831,6 +1837,10 @@ body {
           <div style="font-size:12px;color:var(--mid);text-align:center;padding:32px 0">
             El análisis aparece aquí cuando subas una imagen
           </div>
+        </div>
+        <div class="chk-voice-sec" id="chkVoiceSec" style="display:none">
+          <div class="chk-voice-title">VOZ Y TONO</div>
+          <div class="chk-results" id="chkVoice"></div>
         </div>
       </div>
     </div>
@@ -2109,6 +2119,104 @@ function buildChecks(a) {
 
 let chkHasImg = false;
 
+// --- Tesseract OCR ---
+function loadTesseract() {
+  return new Promise(resolve => {
+    if (window.Tesseract) { resolve(window.Tesseract); return; }
+    const s = document.createElement('script');
+    s.src = 'https://unpkg.com/tesseract.js@5/dist/tesseract.min.js';
+    s.onload = () => resolve(window.Tesseract);
+    document.head.appendChild(s);
+  });
+}
+
+function buildVoiceChecks(rawText) {
+  const t = rawText.toLowerCase();
+
+  // Tuteo: no debe aparecer "usted", "su " (posesivo), "sus " como palabras sueltas
+  const ustedeoMatches = rawText.match(/\busted\b|\bsu\b|\bsus\b/gi) || [];
+  // Filtrar "su" que pueden ser parte del logo "SU" en caps o siglas — solo aplica si hay >1 hit
+  const hasTuteo = ustedeoMatches.filter(m => m.toLowerCase() !== 'su' || ustedeoMatches.length > 2).length === 0;
+
+  // Sin inglés: palabras de acción típicas que no deben aparecer en copy colombiano
+  const engWords = ['click here','buy now','sign up','log in','log out','free trial','get started','learn more','shop now','add to cart','checkout','submit','continue'];
+  const engFound = engWords.filter(w => t.includes(w));
+  const hasNoEnglish = engFound.length === 0;
+
+  // Sin em-dash ni en-dash
+  const hasNoEmDash = !rawText.includes('—') && !rawText.includes('–');
+
+  // Sin tono corporativo formal: "estimado/a", "le rogamos", "por favor tenga en cuenta", "a continuación"
+  const formalMatches = rawText.match(/\bestimad[oa]\b|\ble rogamos\b|\ba continuaci[oó]n\b|\bpor favor tenga\b/gi) || [];
+  const hasDirectTone = formalMatches.length === 0;
+
+  return [
+    {
+      emoji: '🤝',
+      name: 'Tuteo: tú, tus, tienes',
+      pass: hasTuteo,
+      detail: hasTuteo
+        ? 'No se detectó "usted" ni posesivos formales: trato correcto'
+        : `Se detectó trato formal (${ustedeoMatches.slice(0,3).join(', ')}): cambiar a tuteo`,
+    },
+    {
+      emoji: '🇨🇴',
+      name: 'Sin inglés en el copy',
+      pass: hasNoEnglish,
+      detail: hasNoEnglish
+        ? 'Todo el texto detectado parece estar en español'
+        : `Posibles palabras en inglés: "${engFound.join('", "')}". Usar equivalente en español colombiano`,
+    },
+    {
+      emoji: '✍️',
+      name: 'Sin guiones medios largos (—)',
+      pass: hasNoEmDash,
+      detail: hasNoEmDash
+        ? 'No se detectaron guiones medios en el copy'
+        : 'Se detectaron guiones medios (— o –): reemplazar con coma, dos puntos o restructurar',
+    },
+    {
+      emoji: '💬',
+      name: 'Tono directo, no corporativo',
+      pass: hasDirectTone,
+      detail: hasDirectTone
+        ? 'Sin fórmulas de cortesía corporativa detectadas'
+        : `Frases formales detectadas (${formalMatches.slice(0,2).join(', ')}): simplificar al tono ZenderBox`,
+    },
+  ];
+}
+
+function renderVoiceCards(checks, pending) {
+  const sec = document.getElementById('chkVoiceSec');
+  const el = document.getElementById('chkVoice');
+  sec.style.display = 'block';
+  el.innerHTML = '';
+  if (pending) {
+    const d = document.createElement('div');
+    d.className = 'chk-card pending';
+    d.innerHTML = `<div class="chk-card-ico">🔍</div>
+      <div class="chk-card-body">
+        <div class="chk-card-name">Leyendo texto de la imagen…</div>
+        <div class="chk-card-detail">El OCR está extrayendo el copy para analizar voz y tono. Puede tomar unos segundos.</div>
+      </div>
+      <div class="chk-card-badge pending">LEYENDO</div>`;
+    el.appendChild(d);
+    return;
+  }
+  checks.forEach(c => {
+    const state = c.pass ? 'pass' : 'fail';
+    const div = document.createElement('div');
+    div.className = 'chk-card ' + state;
+    div.innerHTML = `<div class="chk-card-ico">${c.emoji}</div>
+      <div class="chk-card-body">
+        <div class="chk-card-name">${c.name} <span style="font-size:9px;color:var(--mid);margin-left:4px;font-weight:600">~ aprox.</span></div>
+        <div class="chk-card-detail">${c.detail}</div>
+      </div>
+      <div class="chk-card-badge ${state}">${c.pass ? 'PASA' : 'FALLA'}</div>`;
+    el.appendChild(div);
+  });
+}
+
 function openChecker() { document.getElementById('chkOv').classList.add('open'); }
 function closeChecker() { document.getElementById('chkOv').classList.remove('open'); }
 
@@ -2198,6 +2306,31 @@ function analyzeImg(img) {
 
   const checks=buildChecks(analysis);
   renderResults(checks, analysis.hasPhoto);
+
+  // OCR para voz y tono (asíncrono)
+  renderVoiceCards([], true);
+  loadTesseract().then(Tesseract =>
+    Tesseract.recognize(img, 'spa+eng', { logger: () => {} })
+  ).then(result => {
+    const text = result.data.text || '';
+    if (text.trim().length < 5) {
+      // Texto muy corto: OCR no extrajo nada útil
+      const sec = document.getElementById('chkVoiceSec');
+      const el = document.getElementById('chkVoice');
+      el.innerHTML = `<div class="chk-card na" style="opacity:.7">
+        <div class="chk-card-ico">🔍</div>
+        <div class="chk-card-body">
+          <div class="chk-card-name">Texto no detectado</div>
+          <div class="chk-card-detail">El OCR no pudo extraer texto de la imagen. Para revisar voz y tono, asegúrate de que el copy sea legible en la pieza.</div>
+        </div>
+        <div class="chk-card-badge na">SIN TEXTO</div>
+      </div>`;
+    } else {
+      renderVoiceCards(buildVoiceChecks(text), false);
+    }
+  }).catch(() => {
+    document.getElementById('chkVoice').innerHTML = `<div style="font-size:11px;color:var(--soft);padding:10px 0">No se pudo cargar el lector de texto. Verifica tu conexión.</div>`;
+  });
 }
 
 function handleChkFile(file) {
@@ -2233,6 +2366,8 @@ function resetChecker() {
   arc.style.strokeDashoffset='238.76'; arc.style.stroke='#029ECB';
   document.getElementById('chkResults').innerHTML='<div style="font-size:12px;color:var(--mid);text-align:center;padding:32px 0">El análisis aparece aquí cuando subas una imagen</div>';
   document.getElementById('chkFtNote').textContent='Sube una imagen para comenzar el diagnóstico automático';
+  document.getElementById('chkVoiceSec').style.display='none';
+  document.getElementById('chkVoice').innerHTML='';
 }
 </script>
 
