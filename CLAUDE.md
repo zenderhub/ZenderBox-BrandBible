@@ -55,6 +55,37 @@ El formato define el canvas, la jerarquía visual y cómo se comporta el texto.
 
 ---
 
+## Datos de contacto reales — siempre verificar
+
+Antes de incluir cualquier dato de contacto en una pieza, verifica en **www.zenderbox.com** que sea el dato real. Nunca uses placeholders, números inventados ni emails de ejemplo.
+
+Datos vigentes confirmados (verificar si cambian):
+- WhatsApp: **+1 786-442-3800**
+- Web: **www.zenderbox.com**
+- Instagram: **@zenderbox.col**
+- Facebook: **facebook.com/zenderbox.col**
+- TikTok: **@zenderbox**
+
+---
+
+## Iconos en piezas de comunicación — emojis, no Lucide
+
+En piezas de comunicación (posts, brochures, stories, banners, emails): usa **emojis** para los iconos de contenido, no Lucide ni ninguna librería SVG externa.
+
+Lucide (`unpkg.com/lucide`) es solo para la **UI del producto** (app móvil, dashboard). En una pieza impresa o de redes sociales no hay interactividad, los SVG de Lucide pueden no renderizar, y los emojis son más directos y legibles.
+
+| En lugar de | Usa |
+|---|---|
+| `<i data-lucide="globe">` | 🌐 |
+| `<i data-lucide="package">` | 📦 |
+| `<i data-lucide="smartphone">` | 📱 |
+| `<i data-lucide="trending-up">` | 📈 |
+| `<i data-lucide="mail">` | 📧 |
+| `<i data-lucide="message-circle">` | 💬 |
+| `<i data-lucide="map-pin">` | 📍 |
+
+---
+
 ## Reglas siempre activas — sin excepción
 
 - Español colombiano, tuteo siempre (tu, tus, tienes, hazle). Nunca usted.
