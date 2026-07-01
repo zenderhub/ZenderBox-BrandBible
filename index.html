@@ -1951,6 +1951,8 @@ function runAnalysis(data, width, height) {
   }
   const eM=edgeV.reduce((a,b)=>a+b,0)/edgeV.length;
   const edgeStddev=Math.sqrt(edgeV.reduce((s,v)=>s+(v-eM)**2,0)/edgeV.length);
+  // Full bleed real: bordes no son blancos/claros (no márgenes blancos)
+  const lightEdgeRatio = edgeV.filter(v=>v>200).length / edgeV.length;
 
   // Orphan band detection: busca filas de contenido aisladas entre dos tramos blancos
   // (señal de texto que desbordó un contenedor / elementos encimados)
@@ -2012,9 +2014,10 @@ function runAnalysis(data, width, height) {
     darkPx, cyanDarkPx,
     cyanDarkRatio: darkPx>10 ? cyanDarkPx/darkPx : null,
     gradientRatio: gradRows/ROWS,
+    lightEdgeRatio,
     hasWhiteLogo: (()=>{
       const bottomTotal=(height-bottomStart)*width;
-      return bottomBrightPx>40 && (bottomBrightPx/bottomTotal)>0.008 && (bottomDarkPx/bottomTotal)>0.25;
+      return bottomBrightPx>20 && (bottomBrightPx/bottomTotal)>0.004 && (bottomDarkPx/bottomTotal)>0.20;
     })(),
     edgeStddev,
     logoCentroidRatio,
@@ -2072,10 +2075,10 @@ function buildChecks(a) {
     {
       id:'full_bleed', emoji:'📐', name:'Fotografía a full bleed',
       pts:10, photoOnly:true,
-      pass: a.edgeStddev > 34,
-      detail: a.edgeStddev > 34
-        ? `Varianza de bordes ${a.edgeStddev.toFixed(0)}: la imagen llega a todos los bordes (full bleed)`
-        : `Varianza de bordes ${a.edgeStddev.toFixed(0)}: posibles márgenes blancos o foto que no llega a los bordes`,
+      pass: a.lightEdgeRatio < 0.25,
+      detail: a.lightEdgeRatio < 0.25
+        ? `Bordes sin márgenes blancos (${(a.lightEdgeRatio*100).toFixed(0)}% claro): fotografía llega hasta los bordes`
+        : `${(a.lightEdgeRatio*100).toFixed(0)}% de los bordes son claros o blancos: posibles márgenes alrededor de la foto`,
     },
     {
       id:'overlay', emoji:'🌊', name:'Overlay sobre foto tira a cyan',
@@ -2142,8 +2145,9 @@ function buildVoiceChecks(rawText) {
   const engFound = engWords.filter(w => t.includes(w));
   const hasNoEnglish = engFound.length === 0;
 
-  // Sin em-dash ni en-dash en contexto de prosa (no entre dígitos como "95–12" o "No. 95-12")
-  const dashMatches = rawText.match(/(?<!\d)[—–](?!\d)/g) || [];
+  // Sin em-dash ni en-dash en prosa: eliminar primero separadores numéricos (OCR puede añadir espacios)
+  const textNoDashNums = rawText.replace(/\d\s*[—–]\s*\d/g, 'NUM');
+  const dashMatches = textNoDashNums.match(/[—–]/g) || [];
   const hasNoEmDash = dashMatches.length === 0;
 
   // Sin tono corporativo formal: "estimado/a", "le rogamos", "por favor tenga en cuenta", "a continuación"
