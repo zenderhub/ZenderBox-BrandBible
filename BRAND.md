@@ -313,7 +313,23 @@ Set custom basado en **Lucide** (stroke icons).
 
 ---
 
-## 11. Fotografia
+## 11. Fotografía
+
+### Reglas obligatorias
+
+**La fotografía es siempre la primera opción.** Toda pieza de comunicación debe explorar primero una solución con foto real. Solo si el formato no lo permite (icono, ilustración de proceso, estado vacío) se recurre a ilustración.
+
+**Las fotos se consiguen en bibliotecas libres**, en este orden:
+1. **Pexels** — pexels.com (CC0, uso comercial sin atribución)
+2. **Unsplash** — unsplash.com (uso comercial libre)
+3. **Pixabay** — pixabay.com (uso comercial libre)
+
+**Las fotos van siempre a sangre completa (full bleed).** Cubren el 100 % del área designada sin bordes ni márgenes. El texto y los overlays van sobre la foto extendida.
+```css
+/* Correcto */
+object-fit: cover; width: 100%; height: 100%;
+/* Incorrecto: foto con márgenes, marcos o borde visible */
+```
 
 ### Concepto
 
@@ -337,6 +353,7 @@ ZenderBox existe en el espacio entre el deseo y la llegada. Las fotos capturan:
 - Aviones o barcos como metáfora de envío (cliché del sector)
 - Personas posando con cajas sin contexto emocional
 - Saturación artificial de colores
+- Fotos reducidas con márgenes o marcos visibles
 
 ### Overlays sobre fotos
 
@@ -413,6 +430,9 @@ Ver [`voice.md`](voice.md) para guía completa.
 - [ ] ¿Los botones primarios tienen el gradiente o el fill correcto según el contexto?
 - [ ] ¿El copy está en español latinoamericano, en tuteo?
 - [ ] ¿Los números usan punto como separador de miles?
+- [ ] ¿Se exploró primero una solución con fotografía real antes de recurrir a ilustración?
+- [ ] ¿La foto viene de una biblioteca libre (Pexels, Unsplash o Pixabay)?
+- [ ] ¿La foto va a sangre completa (full bleed, sin márgenes ni marcos)?
 - [ ] ¿Las fotos siguen la dirección de luz natural y diversidad latina?
 - [ ] ¿Los iconos son Lucide con stroke 1.8px?
 - [ ] ¿Los radios de cards y botones corresponden al producto (app vs web)?

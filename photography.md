@@ -1,5 +1,29 @@
 # ZenderBox — Fotografía, Video e Ilustración
 
+## Reglas de uso — obligatorias
+
+### 1. La fotografía es siempre la primera opción
+Cualquier pieza de comunicación — post, banner, landing, story, email — debe explorar primero una solución con fotografía real. Solo si la fotografía no existe, no es conseguible, o el formato no lo permite (ej. icono, ilustración de proceso) se recurre a ilustración o recurso gráfico.
+
+### 2. Las fotos se consiguen en bibliotecas libres
+Fuentes aceptadas, en orden de preferencia:
+1. **Pexels** — pexels.com — licencia CC0, uso comercial sin atribución requerida
+2. **Unsplash** — unsplash.com — licencia Unsplash, uso comercial libre
+3. **Pixabay** — pixabay.com — licencia Pixabay, uso comercial libre
+
+Nunca usar fotos sin licencia clara, watermarks eliminados, o descargadas de Google Imágenes directamente.
+
+### 3. La foto ocupa siempre el 100 % del espacio disponible
+Las fotos van siempre a **sangre completa** (full bleed): cubren todo el área designada sin bordes, márgenes de foto, ni marcos. El recorte, la composición y los overlays se resuelven sobre la foto extendida, nunca reduciendo su tamaño.
+
+```
+✅ object-fit: cover; width: 100%; height: 100%;
+❌ foto centrada con márgenes blancos alrededor
+❌ foto en caja con borde o sombra visible
+```
+
+---
+
 ## El territorio visual de ZenderBox
 
 ZenderBox existe en el espacio emocional entre el **deseo** y la **llegada**. Cada imagen debe habitar ese territorio: lo que el usuario quiere, el momento de espera activa, y la satisfacción de recibir.
