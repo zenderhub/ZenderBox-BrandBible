@@ -367,7 +367,7 @@ body {
   position: relative; overflow: hidden;
   transition: box-shadow .2s, border-color .2s;
 }
-/* Variante 1 — línea inferior */
+/* Variante 1: línea inferior */
 .demo-bottom::after {
   content: ''; position: absolute;
   bottom: 0; left: 0; right: 0; height: 2px;
@@ -376,7 +376,7 @@ body {
   transition: transform .25s ease;
 }
 .demo-bottom:hover::after { transform: scaleX(1); }
-/* Variante 2 — borde completo */
+/* Variante 2: borde completo */
 .demo-border {
   transition: border-color .2s, background .2s;
 }
@@ -386,7 +386,7 @@ body {
     linear-gradient(white, white) padding-box,
     linear-gradient(90deg, #029ECB 0%, #CCD32A 100%) border-box;
 }
-/* Variante 3 — línea izquierda */
+/* Variante 3: línea izquierda */
 .demo-left::before {
   content: ''; position: absolute;
   left: 0; top: 0; bottom: 0; width: 3px;
@@ -396,7 +396,7 @@ body {
   border-radius: 0 2px 2px 0;
 }
 .demo-left:hover::before { transform: scaleY(1); }
-/* Variante 4 — underline en texto/links */
+/* Variante 4: underline en texto/links */
 .demo-link {
   display: inline-block; position: relative;
   font-weight: 700; color: var(--navy); text-decoration: none;
@@ -410,7 +410,7 @@ body {
   transition: transform .2s ease;
 }
 .demo-link:hover::after { transform: scaleX(1); }
-/* Variante 5 — fila de tabla */
+/* Variante 5: fila de tabla */
 .demo-row {
   display: grid; grid-template-columns: 48px 1fr 100px 80px;
   align-items: center; gap: 16px;
@@ -571,7 +571,7 @@ body {
         <div class="grid-4">
           <div style="text-align:center;padding:20px 12px;background:var(--surface);border-radius:10px">
             <div style="font-family:'Exo',sans-serif;font-size:15px;font-weight:800;color:var(--navy);margin-bottom:8px">Empoderador</div>
-            <div style="font-size:12px;color:var(--soft);line-height:1.5">Da acceso a lo que antes era solo para otros. No explica — habilita.</div>
+            <div style="font-size:12px;color:var(--soft);line-height:1.5">Da acceso a lo que antes era solo para otros. No explica: habilita.</div>
           </div>
           <div style="text-align:center;padding:20px 12px;background:var(--surface);border-radius:10px">
             <div style="font-family:'Exo',sans-serif;font-size:15px;font-weight:800;color:var(--navy);margin-bottom:8px">Transparente</div>
@@ -583,7 +583,7 @@ body {
           </div>
           <div style="text-align:center;padding:20px 12px;background:var(--surface);border-radius:10px">
             <div style="font-family:'Exo',sans-serif;font-size:15px;font-weight:800;color:var(--navy);margin-bottom:8px">Cercano</div>
-            <div style="font-size:12px;color:var(--soft);line-height:1.5">Habla como la gente. Colombiano sin ser regional — LATAM.</div>
+            <div style="font-size:12px;color:var(--soft);line-height:1.5">Habla como la gente. Colombiano sin ser regional: LATAM.</div>
           </div>
         </div>
       </div>
@@ -669,13 +669,13 @@ body {
       <div class="card">
         <div class="card-title">Gradientes</div>
         <div class="grad-block" style="background:linear-gradient(45deg,#029ECB 0%,#CCD32A 85%)">
-          <span class="grad-label">App / Dashboard — 45deg, cyan → lime</span>
+          <span class="grad-label">App / Dashboard: 45deg, cyan → lime</span>
         </div>
         <div class="grad-block" style="background:linear-gradient(90deg,#CCD32A 0%,#029ECB 85%)">
-          <span class="grad-label">Web pública — 90deg, lime → cyan</span>
+          <span class="grad-label">Web pública: 90deg, lime → cyan</span>
         </div>
         <div class="grad-block" style="background:linear-gradient(135deg,#CCD32A 0%,#029ECB 100%)">
-          <span class="grad-label">Hero sections — 135deg, lime → cyan</span>
+          <span class="grad-label">Hero sections: 135deg, lime → cyan</span>
         </div>
         <div class="code-block">
 <span class="c">/* App/Dashboard */</span>
@@ -732,10 +732,10 @@ body {
       </div>
 
       <div class="card">
-        <div class="card-title">Plus Jakarta Sans — App y Dashboard</div>
+        <div class="card-title">Plus Jakarta Sans: App y Dashboard</div>
         <div style="margin-bottom:20px">
           <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:48px;font-weight:700;color:var(--navy);line-height:1">Plus Jakarta Sans</div>
-          <div style="font-size:13px;color:var(--mid);margin-top:8px">Pesos usados: 500 (Medium) · 700 (Bold) · 800 (ExtraBold — solo código de referido)</div>
+          <div style="font-size:13px;color:var(--mid);margin-top:8px">Pesos usados: 500 (Medium) · 700 (Bold) · 800 (ExtraBold: solo código de referido)</div>
         </div>
         <div class="type-row">
           <div class="type-meta"><div class="type-label">Display L</div><div class="type-spec">Bold 700 · 32/38</div></div>
@@ -772,7 +772,7 @@ body {
       </div>
 
       <div class="card">
-        <div class="card-title">Exo — Web pública (titulares y botones)</div>
+        <div class="card-title">Exo: Web pública (titulares y botones)</div>
         <div style="margin-bottom:20px">
           <div style="font-family:'Exo',sans-serif;font-size:48px;font-weight:800;color:var(--navy);line-height:1">Exo Display</div>
           <div style="font-size:13px;color:var(--mid);margin-top:8px">Solo en la web pública. Nunca en la app o dashboard. Pesos: 400, 600, 700, 800.</div>
@@ -806,7 +806,7 @@ body {
         <p class="page-desc">"Zender" en cyan · "Box" en lime. El símbolo forma Z+B con dos piezas en gradiente. Tres variantes de uso según el fondo.</p>
       </div>
 
-      <!-- USO SOBRE FONDOS — 3 columnas -->
+      <!-- USO SOBRE FONDOS: 3 columnas -->
       <div class="card">
         <div class="card-title">Uso según el fondo</div>
         <div class="grid-3" style="gap:0;border-radius:12px;overflow:hidden;border:1px solid var(--divider)">
@@ -834,7 +834,7 @@ body {
             <img src="logo-hor-blanco.svg" alt="ZenderBox logo blanco sobre gradiente" style="width:180px;height:auto">
             <div style="text-align:center">
               <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.85);margin-bottom:4px">Fondo gradiente / cyan</div>
-              <div style="font-size:10px;color:rgba(255,255,255,.6)">Logo todo blanco — colores se pierden</div>
+              <div style="font-size:10px;color:rgba(255,255,255,.6)">Logo todo blanco: colores se pierden</div>
             </div>
           </div>
 
@@ -843,7 +843,7 @@ body {
 
       <!-- SÍMBOLO / FAVICON -->
       <div class="card">
-        <div class="card-title">Símbolo — favicon y uso standalone</div>
+        <div class="card-title">Símbolo: favicon y uso standalone</div>
         <div style="display:flex;gap:16px;align-items:stretch;flex-wrap:wrap;margin-bottom:20px">
           <div style="background:#FFFFFF;border:1px solid var(--divider);border-radius:12px;padding:28px 32px;display:flex;flex-direction:column;align-items:center;gap:12px;flex:1;min-width:140px">
             <img src="logo-fav-color.svg" alt="Favicon color" style="width:64px;height:64px">
@@ -912,7 +912,7 @@ body {
             <div class="dont-header">✗ Prohibido</div>
             <div class="dont-item">Recolorear el wordmark o el símbolo</div>
             <div class="dont-item">Estirar, rotar o comprimir el logo</div>
-            <div class="dont-item">Logo color sobre fondo gradiente — se pierde</div>
+            <div class="dont-item">Logo color sobre fondo gradiente: se pierde</div>
             <div class="dont-item">Separar el símbolo del wordmark (salvo favicon)</div>
           </div>
         </div>
@@ -930,7 +930,7 @@ body {
       </div>
 
       <div class="card">
-        <div class="card-title">App / Dashboard — Plus Jakarta Sans</div>
+        <div class="card-title">App / Dashboard: Plus Jakarta Sans</div>
         <div class="btn-row">
           <button class="btn-preview bp-primary">Agregar paquete</button>
           <button class="btn-preview bp-secondary">Ver tracking</button>
@@ -954,7 +954,7 @@ body {
       </div>
 
       <div class="card">
-        <div class="card-title">Web pública — Exo Bold UPPERCASE · radius 900px</div>
+        <div class="card-title">Web pública: Exo Bold UPPERCASE · radius 900px</div>
         <div class="btn-row">
           <button class="btn-preview bp-web-primary">ABRIR MI CASILLERO GRATIS</button>
           <button class="btn-preview bp-web-secondary">VER TARIFAS</button>
@@ -969,7 +969,7 @@ body {
       </div>
 
       <div class="card">
-        <div class="card-title">Interacciones — aplica a todos</div>
+        <div class="card-title">Interacciones: aplica a todos</div>
         <div class="grid-3" style="gap:12px">
           <div style="background:var(--surface);border-radius:8px;padding:14px">
             <div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:4px">Default</div>
@@ -998,7 +998,7 @@ body {
       </div>
 
       <div class="card">
-        <div class="card-title">State Badges — estados de paquete</div>
+        <div class="card-title">State Badges: estados de paquete</div>
         <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px">
           <span class="state-badge sb-tienda">En Tienda</span>
           <span class="state-badge sb-bodega">En Bodega</span>
@@ -1048,7 +1048,7 @@ body {
       <div class="page-header">
         <div class="page-eyebrow">Componentes</div>
         <h1 class="page-title">Iconografía</h1>
-        <p class="page-desc">Set basado en Lucide. Stroke 1.8px uniforme, tamaño 18×18px por defecto. Sin fills — solo outline.</p>
+        <p class="page-desc">Set basado en Lucide. Stroke 1.8px uniforme, tamaño 18×18px por defecto. Sin fills: solo outline.</p>
       </div>
 
       <div class="card">
@@ -1117,7 +1117,7 @@ body {
 
       <div class="grid-2">
         <div class="card">
-          <div class="card-title">Tokens de spacing — App</div>
+          <div class="card-title">Tokens de spacing: App</div>
           <div class="spacing-row"><div class="spacing-block" style="width:2px"></div><div class="spacing-label">xxxs = 2px</div><div class="spacing-desc">Microgap entre iconos y texto</div></div>
           <div class="spacing-row"><div class="spacing-block" style="width:4px"></div><div class="spacing-label">xxs = 4px</div><div class="spacing-desc">Gap badges, dots</div></div>
           <div class="spacing-row"><div class="spacing-block" style="width:8px"></div><div class="spacing-label">xs = 8px</div><div class="spacing-desc">Gap elementos inline</div></div>
@@ -1188,7 +1188,7 @@ body {
         <div style="display:flex;align-items:center;gap:20px">
           <div style="flex:1">
             <div style="font-family:'Exo',sans-serif;font-size:20px;font-weight:800;color:white;margin-bottom:6px">El gradiente aparece en el hover, no en el reposo</div>
-            <div style="font-size:13px;color:rgba(255,255,255,.85);line-height:1.6">En estado default los bordes son neutros (#E5E7EB o transparentes). La línea de gradiente emerge como respuesta al cursor — es señal de que algo es interactuable y reacciona.</div>
+            <div style="font-size:13px;color:rgba(255,255,255,.85);line-height:1.6">En estado default los bordes son neutros (#E5E7EB o transparentes). La línea de gradiente emerge como respuesta al cursor: es señal de que algo es interactuable y reacciona.</div>
           </div>
           <div style="background:rgba(255,255,255,.15);border-radius:10px;padding:16px 20px;flex-shrink:0;text-align:center">
             <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:6px">Duración</div>
@@ -1198,9 +1198,9 @@ body {
         </div>
       </div>
 
-      <!-- DEMO 1 — LÍNEA INFERIOR EN CARDS -->
+      <!-- DEMO 1: LÍNEA INFERIOR EN CARDS -->
       <div class="card">
-        <div class="card-title">Línea inferior — cards y paquetes
+        <div class="card-title">Línea inferior: cards y paquetes
           <span style="font-size:10px;font-weight:500;color:var(--mid);text-transform:none;letter-spacing:0">Pasa el cursor sobre cada card</span>
         </div>
         <div class="grid-3" style="gap:16px">
@@ -1245,7 +1245,7 @@ body {
           </div>
         </div>
         <div class="code-block" style="margin-top:20px">
-<span class="c">/* Línea inferior — emerge de izquierda a derecha */</span>
+<span class="c">/* Línea inferior: emerge de izquierda a derecha */</span>
 <span class="p">.card</span> { <span class="p">position:</span> <span class="s">relative</span>; <span class="p">overflow:</span> <span class="s">hidden</span>; }
 <span class="p">.card::after</span> {
   <span class="p">content:</span> <span class="s">''</span>; <span class="p">position:</span> <span class="s">absolute</span>;
@@ -1258,9 +1258,9 @@ body {
         </div>
       </div>
 
-      <!-- DEMO 2 — FILAS DE TABLA -->
+      <!-- DEMO 2: FILAS DE TABLA -->
       <div class="card">
-        <div class="card-title">Filas de tabla — tracking y listados
+        <div class="card-title">Filas de tabla: tracking y listados
           <span style="font-size:10px;font-weight:500;color:var(--mid);text-transform:none;letter-spacing:0">Pasa el cursor sobre cada fila</span>
         </div>
         <div style="border:1px solid var(--divider);border-radius:10px;overflow:hidden">
@@ -1297,7 +1297,7 @@ body {
         </div>
       </div>
 
-      <!-- DEMO 3 — BORDE COMPLETO + LÍNEA IZQUIERDA -->
+      <!-- DEMO 3: BORDE COMPLETO + LÍNEA IZQUIERDA -->
       <div class="grid-2">
         <div class="card">
           <div class="card-title">Borde completo
@@ -1358,14 +1358,14 @@ body {
         </div>
       </div>
 
-      <!-- DEMO 4 — INPUTS + LINKS -->
+      <!-- DEMO 4: INPUTS + LINKS -->
       <div class="card">
         <div class="card-title">Inputs y links
           <span style="font-size:10px;font-weight:500;color:var(--mid);text-transform:none;letter-spacing:0">Haz clic en el campo o pasa el cursor por los links</span>
         </div>
         <div class="grid-2" style="gap:32px;align-items:start">
           <div>
-            <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px">Input — borde gradiente en focus</div>
+            <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px">Input: borde gradiente en focus</div>
             <div style="display:flex;flex-direction:column;gap:12px">
               <input class="demo-input" type="text" placeholder="Descripción del paquete">
               <input class="demo-input" type="text" placeholder="Número de tracking">
@@ -1383,7 +1383,7 @@ body {
             </div>
           </div>
           <div>
-            <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px">Links — underline gradiente en hover</div>
+            <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px">Links: underline gradiente en hover</div>
             <div style="display:flex;flex-direction:column;gap:16px">
               <div style="font-size:14px;color:var(--soft)">¿No encontraste el paquete? <a class="demo-link" href="#">Agrégalo a la app</a> para hacerle seguimiento.</div>
               <div style="font-size:14px;color:var(--soft)">Tienes <a class="demo-link" href="#">322 puntos</a> para subir de nivel.</div>
@@ -1423,7 +1423,7 @@ body {
           </div>
           <div style="background:var(--surface);border-radius:8px;padding:14px">
             <div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:6px">Timing</div>
-            <div style="font-size:12px;color:var(--soft);line-height:1.6">200–250ms ease. La animación emerge con scaleX/scaleY desde 0 — nunca aparece de golpe.</div>
+            <div style="font-size:12px;color:var(--soft);line-height:1.6">200–250ms ease. La animación emerge con scaleX/scaleY desde 0: nunca aparece de golpe.</div>
           </div>
           <div style="background:var(--surface);border-radius:8px;padding:14px">
             <div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:6px">Default</div>
@@ -1545,7 +1545,7 @@ body {
       </div>
 
       <div class="card">
-        <div class="card-title">Frases canónicas — usar exactamente así</div>
+        <div class="card-title">Frases canónicas: usar exactamente así</div>
         <div style="display:flex;flex-wrap:wrap;gap:8px">
           <span class="copy-pill"><strong>"Hola, Juan"</strong></span>
           <span class="copy-pill"><strong>"Mis datos en Estados Unidos"</strong></span>
@@ -1662,7 +1662,7 @@ body {
         <div class="do-dont-grid">
           <div class="do-card">
             <div class="do-header">✓ Fotografía correcta</div>
-            <div class="do-item">Luz natural, amplia — sin flash frontal</div>
+            <div class="do-item">Luz natural, amplia: sin flash frontal</div>
             <div class="do-item">Personas latinoamericanas, diversas, edad 18–45</div>
             <div class="do-item">Expresiones reales, no poses de catálogo</div>
             <div class="do-item">Espacio de trabajo real, no estudio aséptico</div>
@@ -1684,18 +1684,18 @@ body {
         <div class="do-dont-grid">
           <div class="do-card">
             <div class="do-header">✓ Copy correcto</div>
-            <div class="do-item">"Tu paquete llegó a bodega." — claro, directo</div>
-            <div class="do-item">"Algo no funcionó. Intenta de nuevo." — honesto</div>
-            <div class="do-item">"Abre tu casillero gratis" — tuteo, acción directa</div>
+            <div class="do-item">"Tu paquete llegó a bodega.": claro, directo</div>
+            <div class="do-item">"Algo no funcionó. Intenta de nuevo.": honesto</div>
+            <div class="do-item">"Abre tu casillero gratis": tuteo, acción directa</div>
             <div class="do-item">1.678 puntos (punto para miles)</div>
             <div class="do-item">$349.00 USD (símbolo + espacio + código)</div>
           </div>
           <div class="dont-card">
             <div class="dont-header">✗ Copy incorrecto</div>
-            <div class="dont-item">"¡Tu paquete ya está aquí!!! 🎉" — exagerado</div>
-            <div class="dont-item">"Su pedido ha sido procesado." — ustedeo</div>
-            <div class="dont-item">"Package received" — inglés en UI de usuario</div>
-            <div class="dont-item">"Ups! Algo salió mal 😅" — infantil</div>
+            <div class="dont-item">"¡Tu paquete ya está aquí!!! 🎉": exagerado</div>
+            <div class="dont-item">"Su pedido ha sido procesado.": ustedeo</div>
+            <div class="dont-item">"Package received": inglés en UI de usuario</div>
+            <div class="dont-item">"Ups! Algo salió mal 😅": infantil</div>
             <div class="dont-item">1,678 puntos (coma como separador de miles)</div>
           </div>
         </div>
@@ -1781,8 +1781,8 @@ body {
       <div class="chk-hd-l">
         <div class="chk-hd-ico">🔍</div>
         <div>
-          <div class="chk-hd-title">Brand Checker — ZenderBox</div>
-          <div class="chk-hd-sub">Sube una pieza — el checker analiza la imagen automáticamente</div>
+          <div class="chk-hd-title">Brand Checker: ZenderBox</div>
+          <div class="chk-hd-sub">Sube una pieza: el checker analiza la imagen automáticamente</div>
         </div>
       </div>
       <button class="chk-x" onclick="closeChecker()">✕</button>
@@ -1843,7 +1843,7 @@ body {
 </div>
 
 <script>
-// ══ BRAND CHECKER — análisis 100% automático ══
+// ══ BRAND CHECKER: análisis 100% automático ══
 const BRAND_CLR = [
   {r:2,  g:158,b:203, name:'Cyan'},    {r:204,g:211,b:42,  name:'Lime'},
   {r:0,  g:75, b:114, name:'Navy'},    {r:0,  g:123,b:159, name:'Dark Cyan'},
@@ -2035,24 +2035,24 @@ function buildChecks(a) {
       pts:12, photoOnly:false,
       pass: a.cyanRatio > 0.004,
       detail: a.cyanRatio > 0.004
-        ? `${(a.cyanRatio*100).toFixed(1)}% de píxeles en cyan de marca — presente`
-        : `Solo ${(a.cyanRatio*100).toFixed(3)}% de cyan detectado — ausente o muy escaso`,
+        ? `${(a.cyanRatio*100).toFixed(1)}% de píxeles en cyan de marca: presente`
+        : `Solo ${(a.cyanRatio*100).toFixed(3)}% de cyan detectado: ausente o muy escaso`,
     },
     {
       id:'lime', emoji:'🟡', name:'Lime #CCD32A presente',
       pts:10, photoOnly:false,
       pass: a.limeRatio > 0.002,
       detail: a.limeRatio > 0.002
-        ? `${(a.limeRatio*100).toFixed(2)}% de lime detectado — presente en la pieza`
-        : `Lime no detectado (${(a.limeRatio*100).toFixed(4)}%) — revisar CTAs, botones o gradiente`,
+        ? `${(a.limeRatio*100).toFixed(2)}% de lime detectado: presente en la pieza`
+        : `Lime no detectado (${(a.limeRatio*100).toFixed(4)}%): revisar CTAs, botones o gradiente`,
     },
     {
-      id:'white_first', emoji:'⬜', name:'White First — fondo predominantemente claro',
+      id:'white_first', emoji:'⬜', name:'White First: fondo predominantemente claro',
       pts:18, photoOnly:false,
       pass: a.lightRatio > 0.38,
       detail: a.lightRatio > 0.38
-        ? `${(a.lightRatio*100).toFixed(0)}% de la imagen es blanco o claro — White First cumplido`
-        : `Solo ${(a.lightRatio*100).toFixed(0)}% claro — el fondo no es predominantemente blanco`,
+        ? `${(a.lightRatio*100).toFixed(0)}% de la imagen es blanco o claro: White First cumplido`
+        : `Solo ${(a.lightRatio*100).toFixed(0)}% claro: el fondo no es predominantemente blanco`,
     },
     {
       id:'off_brand', emoji:'🚫', name:'Sin colores off-brand dominantes',
@@ -2060,33 +2060,33 @@ function buildChecks(a) {
       pass: a.offBrandRatio < 0.04,
       detail: a.offBrandRatio < 0.04
         ? `Solo ${(a.offBrandRatio*100).toFixed(1)}% de píxeles con colores fuera de la paleta ZenderBox`
-        : `${(a.offBrandRatio*100).toFixed(1)}% de píxeles con colores saturados fuera de la paleta — revisar elementos gráficos`,
+        : `${(a.offBrandRatio*100).toFixed(1)}% de píxeles con colores saturados fuera de la paleta: revisar elementos gráficos`,
     },
     {
       id:'dark_tint', emoji:'🌑', name:'Oscuros con tinte cyan (no negro puro)',
       pts:15, photoOnly:false,
       pass: !hasDark || a.cyanDarkRatio > 0.26,
       detail: !hasDark
-        ? 'Sin áreas oscuras significativas — no aplica este criterio'
+        ? 'Sin áreas oscuras significativas: no aplica este criterio'
         : a.cyanDarkRatio > 0.26
-          ? `${(a.cyanDarkRatio*100).toFixed(0)}% de áreas oscuras con tinte cyan — sin negro puro`
-          : `Solo ${(a.cyanDarkRatio*100).toFixed(0)}% de áreas oscuras con tinte cyan — posible uso de negro puro sin identidad de marca`,
+          ? `${(a.cyanDarkRatio*100).toFixed(0)}% de áreas oscuras con tinte cyan: sin negro puro`
+          : `Solo ${(a.cyanDarkRatio*100).toFixed(0)}% de áreas oscuras con tinte cyan: posible uso de negro puro sin identidad de marca`,
     },
     {
       id:'gradient', emoji:'🎯', name:'Gradiente usado con moderación',
       pts:10, photoOnly:false,
       pass: a.gradientRatio < 0.55,
       detail: a.gradientRatio < 0.55
-        ? `Gradiente en ~${(a.gradientRatio*100).toFixed(0)}% de la imagen — uso moderado y de impacto`
-        : `Gradiente cubre ~${(a.gradientRatio*100).toFixed(0)}% de la imagen — uso excesivo. El gradiente tiene poder porque se usa poco`,
+        ? `Gradiente en ~${(a.gradientRatio*100).toFixed(0)}% de la imagen: uso moderado y de impacto`
+        : `Gradiente cubre ~${(a.gradientRatio*100).toFixed(0)}% de la imagen: uso excesivo. El gradiente tiene poder porque se usa poco`,
     },
     {
       id:'full_bleed', emoji:'📐', name:'Fotografía a full bleed',
       pts:10, photoOnly:true,
       pass: a.edgeStddev > 34,
       detail: a.edgeStddev > 34
-        ? `Varianza de bordes ${a.edgeStddev.toFixed(0)} — la imagen llega a todos los bordes (full bleed)`
-        : `Varianza de bordes ${a.edgeStddev.toFixed(0)} — posibles márgenes blancos o foto que no llega a los bordes`,
+        ? `Varianza de bordes ${a.edgeStddev.toFixed(0)}: la imagen llega a todos los bordes (full bleed)`
+        : `Varianza de bordes ${a.edgeStddev.toFixed(0)}: posibles márgenes blancos o foto que no llega a los bordes`,
     },
     {
       id:'overlay', emoji:'🌊', name:'Overlay sobre foto tira a cyan',
@@ -2095,34 +2095,34 @@ function buildChecks(a) {
       detail: !hasDark
         ? 'Sin overlay oscuro detectado sobre la foto'
         : a.cyanDarkRatio > 0.20
-          ? `${(a.cyanDarkRatio*100).toFixed(0)}% del overlay con tinte cyan — correcto, no negro puro`
-          : `Overlay con poco cyan (${(a.cyanDarkRatio*100).toFixed(0)}%) — revisar que sea rgba(0,58,85,…) y no rgba(0,0,0,…)`,
+          ? `${(a.cyanDarkRatio*100).toFixed(0)}% del overlay con tinte cyan: correcto, no negro puro`
+          : `Overlay con poco cyan (${(a.cyanDarkRatio*100).toFixed(0)}%): revisar que sea rgba(0,58,85,…) y no rgba(0,0,0,…)`,
     },
     {
-      id:'logo', emoji:'🔷', name:'Logo de ZenderBox — cyan y lime co-localizados',
+      id:'logo', emoji:'🔷', name:'Logo de ZenderBox: cyan y lime co-localizados',
       pts:10, photoOnly:false, approx:true,
       pass: a.cyanPx>8 && a.limePx>8 && a.logoCentroidRatio < 0.40,
       detail: (a.cyanPx<=8 || a.limePx<=8)
-        ? 'No se detectaron ambos colores del logo — puede faltar el logo o usarse la variante blanca'
+        ? 'No se detectaron ambos colores del logo: puede faltar el logo o usarse la variante blanca'
         : a.logoCentroidRatio < 0.40
-          ? `Cyan y lime co-localizados (distancia ${(a.logoCentroidRatio*100).toFixed(0)}% del diagonal) — señal de logo presente`
-          : `Cyan y lime en zonas separadas de la imagen (${(a.logoCentroidRatio*100).toFixed(0)}% del diagonal) — puede faltar el logo`,
+          ? `Cyan y lime co-localizados (distancia ${(a.logoCentroidRatio*100).toFixed(0)}% del diagonal): señal de logo presente`
+          : `Cyan y lime en zonas separadas de la imagen (${(a.logoCentroidRatio*100).toFixed(0)}% del diagonal): puede faltar el logo`,
     },
     {
       id:'contrast', emoji:'👁️', name:'Sin contenido cortado ni elementos encimados',
       pts:8, photoOnly:false, approx:true,
       pass: a.lowContrastRatio < 0.20,
       detail: a.lowContrastRatio < 0.20
-        ? 'Sin acantilados de contenido detectados — los contenedores no parecen cortar texto'
-        : `${Math.round(a.lowContrastRatio*20)} zona(s) donde el contenido se corta abruptamente — probable overflow de texto o elemento encima de otro`,
+        ? 'Sin acantilados de contenido detectados: los contenedores no parecen cortar texto'
+        : `${Math.round(a.lowContrastRatio*20)} zona(s) donde el contenido se corta abruptamente: probable overflow de texto o elemento encima de otro`,
     },
     {
       id:'emojis', emoji:'😊', name:'Emojis presentes en la pieza',
       pts:6, photoOnly:false, approx:true,
       pass: a.emojiRatio > 0.003 && a.emojiCandidates >= 2,
       detail: (a.emojiRatio > 0.003 && a.emojiCandidates >= 2)
-        ? `${a.emojiCandidates} cluster(s) multi-tono en área plana — señal de emojis presentes`
-        : `No se detectaron emojis en zonas de fondo claro — verificar que la pieza incluya al menos uno anclado a una palabra clave`,
+        ? `${a.emojiCandidates} cluster(s) multi-tono en área plana: señal de emojis presentes`
+        : `No se detectaron emojis en zonas de fondo claro: verificar que la pieza incluya al menos uno anclado a una palabra clave`,
     },
   ];
 }
@@ -2147,10 +2147,10 @@ function renderResults(checks, hasPhoto) {
   document.getElementById('chkNum').textContent=pct+'%';
 
   // Verdict
-  const V = pct>=90 ? ['Excelente — muy alineada con la marca','La pieza sigue el brand bible de manera sólida. Lista para publicar.']
-           : pct>=75 ? ['Bien encaminada — ajustes menores','La mayoría de los criterios de marca se cumplen. Revisa los puntos en rojo.']
-           : pct>=50 ? ['En proceso — varios puntos por corregir','Hay criterios importantes que necesitan atención antes de publicar.']
-           :           ['Fuera de marca — revisión necesaria','La pieza necesita ajustes significativos para alinearse con el brand bible.'];
+  const V = pct>=90 ? ['Excelente: muy alineada con la marca','La pieza sigue el brand bible de manera sólida. Lista para publicar.']
+           : pct>=75 ? ['Bien encaminada: ajustes menores','La mayoría de los criterios de marca se cumplen. Revisa los puntos en rojo.']
+           : pct>=50 ? ['En proceso: varios puntos por corregir','Hay criterios importantes que necesitan atención antes de publicar.']
+           :           ['Fuera de marca: revisión necesaria','La pieza necesita ajustes significativos para alinearse con el brand bible.'];
   document.getElementById('chkVerdict').textContent=V[0];
   document.getElementById('chkVerdictD').textContent=V[1];
 
@@ -2160,14 +2160,14 @@ function renderResults(checks, hasPhoto) {
   checks.forEach(c => {
     const isNA = c.photoOnly && !hasPhoto;
     const state = isNA ? 'na' : c.pass ? 'pass' : 'fail';
-    const badgeLabel = isNA ? 'N/A — sin foto' : c.pass ? 'PASA' : 'FALLA';
+    const badgeLabel = isNA ? 'N/A: sin foto' : c.pass ? 'PASA' : 'FALLA';
     const div=document.createElement('div');
     div.className='chk-card '+state;
     const approxNote = (!isNA && c.approx) ? `<span style="font-size:9px;color:var(--mid);margin-left:4px;font-weight:600">~ aprox.</span>` : '';
     div.innerHTML=`<div class="chk-card-ico">${c.emoji}</div>
       <div class="chk-card-body">
         <div class="chk-card-name">${c.name}${approxNote}</div>
-        <div class="chk-card-detail">${isNA ? 'No se detectó fotografía en la pieza — este criterio no aplica.' : c.detail}</div>
+        <div class="chk-card-detail">${isNA ? 'No se detectó fotografía en la pieza: este criterio no aplica.' : c.detail}</div>
       </div>
       <div class="chk-card-badge ${state}">${badgeLabel}</div>`;
     el.appendChild(div);
@@ -2192,7 +2192,7 @@ function analyzeImg(img) {
   const ptag=document.getElementById('chkPhotoTag');
   ptag.style.display='flex';
   ptag.className='chk-photo-tag '+(analysis.hasPhoto?'yes':'no');
-  ptag.textContent=analysis.hasPhoto ? '📷 Fotografía detectada automáticamente' : '🎨 Sin fotografía detectada — pieza gráfica';
+  ptag.textContent=analysis.hasPhoto ? '📷 Fotografía detectada automáticamente' : '🎨 Sin fotografía detectada: pieza gráfica';
 
   // Palette chips
   const buckets={};
