@@ -2078,7 +2078,7 @@ function buildChecks(a) {
       pass: a.lightEdgeRatio < 0.25,
       detail: a.lightEdgeRatio < 0.25
         ? `Bordes sin márgenes blancos (${(a.lightEdgeRatio*100).toFixed(0)}% claro): fotografía llega hasta los bordes`
-        : `${(a.lightEdgeRatio*100).toFixed(0)}% de los bordes son claros o blancos: posibles márgenes alrededor de la foto`,
+        : `${(a.lightEdgeRatio*100).toFixed(0)}% de los bordes son claros o blancos: posibles márgenes alrededor de la foto. Nota: full bleed no es obligatorio, depende del tipo de pieza.`,
     },
     {
       id:'overlay', emoji:'🌊', name:'Overlay sobre foto tira a cyan',
