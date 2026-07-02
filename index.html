@@ -2091,14 +2091,12 @@ function buildChecks(a) {
           : `Overlay con poco cyan (${(a.cyanDarkRatio*100).toFixed(0)}%): revisar que sea rgba(0,58,85,…) y no rgba(0,0,0,…)`,
     },
     {
-      id:'logo', emoji:'🔷', name:'Logo de ZenderBox: cyan y lime co-localizados',
+      id:'logo', emoji:'🔷', name:'Logo de ZenderBox presente',
       pts:10, photoOnly:false, approx:true,
-      pass: (a.cyanPx>8 && a.limePx>8 && a.logoCentroidRatio < 0.40) || a.hasWhiteLogo,
-      detail: ((a.cyanPx>8 && a.limePx>8 && a.logoCentroidRatio < 0.40))
-        ? `Cyan y lime co-localizados (distancia ${(a.logoCentroidRatio*100).toFixed(0)}% del diagonal): logo color detectado`
-        : a.hasWhiteLogo
-          ? 'Logo blanco detectado: zona inferior con elementos claros sobre fondo oscuro'
-          : 'No se detectó logo: puede faltar o estar en una variante no reconocible (muy pequeño, muy recortado)',
+      pass: a.cyanPx > 50 && a.limePx > 50,
+      detail: (a.cyanPx > 50 && a.limePx > 50)
+        ? 'Cyan y lime presentes en la pieza: ambos colores del logo están en uso'
+        : 'Solo un color del logo detectado: revisa que aparezca el logo completo (cyan + lime) en alguna variante',
     },
     {
       id:'contrast', emoji:'👁️', name:'Sin contenido cortado ni elementos encimados',
