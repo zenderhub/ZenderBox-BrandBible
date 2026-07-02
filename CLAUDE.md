@@ -90,11 +90,23 @@ Lucide (`unpkg.com/lucide`) es solo para la **UI del producto** (app móvil, das
 
 - Español colombiano, tuteo siempre (tu, tus, tienes, hazle). Nunca usted.
 - **Sin em-dashes (—). Nunca.** Reemplaza con coma, punto, dos puntos o rearma la frase.
-- Sin emoji sueltos — solo anclados a una palabra clave, badge o ítem de navegación. Nunca dos seguidos.
+- **Titulares de piezas de comunicación: siempre en MAYÚSCULAS** (`text-transform: uppercase`). Sin excepción en posts, stories, brochures, banners y flyers.
+- **Emoji obligatorio en el titular**: toda pieza de comunicación debe tener al menos 1 emoji anclado al inicio o dentro del titular principal, en contexto con el tema. Nunca emoji decorativo suelto fuera del titular. Nunca dos emojis seguidos sin texto entre ellos.
 - Palabras de color en titulares: sólido siempre. Una en cyan `#029ECB`, otra en lime `#CCD32A`. **Nunca gradiente CSS en texto** (`-webkit-background-clip: text` está prohibido).
-- Overlay sobre foto: siempre tira a cyan profundo (`rgba(0,58,85,0.92)` en la base), nunca negro puro.
+- **Overlay sobre foto: siempre cyan claro de marca**, nunca navy ni negro puro. CSS obligatorio:
+  ```css
+  background: linear-gradient(to top,
+    rgba(2,158,203,0.88) 0%,
+    rgba(2,158,203,0.62) 30%,
+    rgba(2,158,203,0.28) 58%,
+    rgba(2,158,203,0.08) 78%,
+    transparent 100%
+  );
+  ```
+- **Sin raya divisora** entre titular y párrafo de cuerpo. No usar `<hr>`, ni bordes, ni líneas decorativas entre esos dos elementos.
 - Fotos a sangre completa (full bleed): `object-fit: cover; width: 100%; height: 100%`. Sin márgenes de foto, sin marcos.
-- Logos: color (`logo-hor-color.svg`) sobre fondos claros; blanco (`logo-hor-blanco.svg`) sobre fondos oscuros y sobre foto.
+- **Logos**: color (`logo-hor-color.svg`) sobre fondos claros; blanco (`logo-hor-blanco.svg`) sobre fondos oscuros y sobre foto. **Tamaño mínimo**: `width: clamp(110px, 22%, 148px)` en canvas 1080px. Proporciones bloqueadas, nunca distorsionar. Margen de respiro mínimo 18px respecto a cualquier borde.
+- **Tipografía en piezas de comunicación**: titular `font-size: clamp(32px, 7.2%, 64px)`, `font-weight: 800`, `line-height: 1.08`. Cuerpo `font-size: clamp(13px, 2.6%, 18px)`, `font-weight: 400`, `line-height: 1.5`.
 - Fotos: solo de Pexels, Unsplash o Pixabay. Nunca sin licencia clara.
 
 ---
