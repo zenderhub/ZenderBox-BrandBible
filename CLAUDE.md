@@ -133,9 +133,17 @@ Usa estos slash commands para tareas específicas:
 
 ---
 
+## Descarga tras aprobación — flujo obligatorio
+
+Cuando el usuario apruebe el arte (con "ok", "aprobado", "así queda", "perfecto" o cualquier confirmación positiva), **pregunta siempre**:
+
+> "¿Lo descargo a tu escritorio en [formato que se pidió al inicio]?"
+
+Si responde que sí, descárgalo de inmediato. Si no había formato definido aún, pregunta cuál prefiere (HTML, PNG o JPG) antes de descargar. Nunca descargues sin preguntar primero, y nunca termines sin ofrecer la descarga.
+
 ## Descarga automática — siempre
 
-Cuando una pieza quede lista, **descárgala automáticamente** al ordenador del usuario en el formato que se pidió al inicio, sin que tenga que hacer nada:
+Cuando la descarga haya sido solicitada, ejecuta según el formato:
 
 - **HTML**: guarda en `~/Desktop/` con nombre descriptivo y dispara un `<a download>` al cargar la página.
 - **PNG / JPG**: usa `html2canvas` sobre el artboard para generar el blob y descargarlo con `canvas.toDataURL()`. Si el entorno no permite CDN externo, genera el archivo desde el servidor local e indica la ruta exacta donde quedó guardado.
