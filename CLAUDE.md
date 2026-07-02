@@ -50,7 +50,15 @@ El formato define el canvas, la jerarquía visual y cómo se comporta el texto.
 ### Pregunta 5 — Artboards
 ¿Cuántas versiones o formatos se necesitan? Por ejemplo: feed + story, versión A/B con dos headlines, español + inglés, varios tamaños del mismo diseño.
 
-### Pregunta 6 — Contexto adicional
+### Pregunta 6 — Audiencia y país
+¿El copy va dirigido a un país específico o debe ser genérico para toda Latinoamérica?
+
+- Si **país específico**: nombrarlo en el copy cuando tenga sentido (ej. "en Colombia", "desde Venezuela"). El tono, los referentes culturales y los ejemplos deben resonar con esa audiencia.
+- Si **sin país**: usar referentes neutros latinoamericanos. Nunca mencionar un país concreto. Frases como "en tu país", "donde estés" o "en toda Latinoamérica" si aplica.
+
+Esto define si el copy puede usar gentilicios, referencias locales o debe mantenerse regional.
+
+### Pregunta 7 — Contexto adicional
 ¿Hay algún elemento específico que deba aparecer: oferta, fecha, nombre de producto, persona, código de descuento? ¿Hay una pieza anterior o referencia visual de la que partir?
 
 ---
@@ -89,6 +97,7 @@ Lucide (`unpkg.com/lucide`) es solo para la **UI del producto** (app móvil, das
 ## Reglas siempre activas — sin excepción
 
 - Español colombiano, tuteo siempre (tu, tus, tienes, hazle). Nunca usted.
+- **País en el copy**: si la pieza va dirigida a un país específico, úsalo en el copy con naturalidad (gentilicios, referencias locales). Si va sin país definido, usa referentes neutros latinoamericanos y nunca menciones un país concreto.
 - **Sin em-dashes (—). Nunca.** Reemplaza con coma, punto, dos puntos o rearma la frase.
 - **Titulares de piezas de comunicación: siempre en MAYÚSCULAS** (`text-transform: uppercase`). Sin excepción en posts, stories, brochures, banners y flyers.
 - **Emoji obligatorio en el titular**: toda pieza de comunicación debe tener al menos 1 emoji anclado al inicio o dentro del titular principal, en contexto con el tema. Nunca emoji decorativo suelto fuera del titular. Nunca dos emojis seguidos sin texto entre ellos.
