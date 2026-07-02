@@ -115,7 +115,10 @@ Lucide (`unpkg.com/lucide`) es solo para la **UI del producto** (app móvil, das
 - **Sin raya divisora** entre titular y párrafo de cuerpo. No usar `<hr>`, ni bordes, ni líneas decorativas entre esos dos elementos.
 - Fotos a sangre completa (full bleed): `object-fit: cover; width: 100%; height: 100%`. Sin márgenes de foto, sin marcos.
 - **Logos**: color (`logo-hor-color.svg`) sobre fondos claros; blanco (`logo-hor-blanco.svg`) sobre fondos oscuros y sobre foto. **Tamaño mínimo**: `width: clamp(110px, 22%, 148px)` en canvas 1080px. Proporciones bloqueadas, nunca distorsionar. Margen de respiro mínimo 18px respecto a cualquier borde.
-- **Tipografía en piezas de comunicación**: titular `font-size: clamp(32px, 7.2%, 64px)`, `font-weight: 800`, `line-height: 1.08`. Cuerpo `font-size: clamp(13px, 2.6%, 18px)`, `font-weight: 400`, `line-height: 1.5`.
+- **Tipografía en piezas de comunicación**:
+  - Titular: `font-size: clamp(44px, 9.5%, 80px)`, `font-weight: 800`, `line-height: 1.05`. **Nunca ponerle `max-width` al titular**: ocupa el ancho completo del área de contenido (de margen a margen). Si el texto es corto, que se vea grande. Si es largo, que fluya en varias líneas ocupando todo el ancho.
+  - Cuerpo: `font-size: clamp(15px, 3.2%, 22px)`, `font-weight: 400`, `line-height: 1.55`.
+  - El cuerpo sí puede tener `max-width` para legibilidad (máximo 85% del área de contenido).
 - Fotos: solo de Pexels, Unsplash o Pixabay. Nunca sin licencia clara.
 
 ---
